@@ -21,10 +21,10 @@ Route::get('/', function () {
 
 // 以下はログイン用
 // 認証が必要ないルート
-// Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-// Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-//     ->name('logout');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 
 // 以下は新規登録用
 Route::get('/register', [RegisterController::class, 'create'])->name('register');

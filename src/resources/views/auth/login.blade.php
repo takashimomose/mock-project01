@@ -1,41 +1,47 @@
-<div class="container">
-    <h2>ログイン</h2>
-    
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@extends('layouts.app')
 
-        <!-- Email Address -->
-        <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus>
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
+@section('title', 'ログイン') <!-- タイトルセクションを上書き -->
 
-        <!-- Password -->
-        <div class="form-group">
-            <label for="password">パスワード</label>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endpush
 
-        <!-- Login Button -->
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">
-                ログインする
-            </button>
-        </div>
+@section('content')
+    <section class="wrapper">
+        <h2>ログイン</h2>
 
-        <!-- Register Link -->
-        <div class="form-group">
-            <a href="{{ route('register') }}">会員登録はこちら</a>
-        </div>
-    </form>
-</div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <!-- メールアドレス -->
+            <div class="form-group">
+                <label for="email" class="form-label">メールアドレス</label>
+                <input class="form-input" type="email" name="email"
+                    value="{{ old('email') }}"placeholder="例: test@example.com">
+                @error('email')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- パスワード -->
+            <div class="form-group">
+                <label for="password" class="form-label">パスワード</label>
+                <input class="form-input" type="password" name="password" placeholder="例: coachtech1106">
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- ログインボタン -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    ログインする
+                </button>
+            </div>
+
+            <!-- 会員登録リンク -->
+            <div class="form-group">
+                <a href="{{ route('register') }}">会員登録はこちら</a>
+            </div>
+        </form>
+    </section>
+@endsection

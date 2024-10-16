@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '会員登録画面') <!-- タイトルセクションを上書き -->
+@section('title', '会員登録') <!-- タイトルセクションを上書き -->
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
