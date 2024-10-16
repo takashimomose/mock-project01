@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileEditController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisterController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,11 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+// 以下はプロフィール編集画面からデータ挿入
+// Route::post('/profiles', [ProfileEditController::class, 'store'])->name('index');
 
 // 以下はログイン用
 // 認証が必要ないルート
@@ -31,6 +36,13 @@ Route::get('/register', [RegisterController::class, 'create'])->name('register')
 Route::post('/register', [RegisterController::class, 'store']);
 
 // 認証済みのユーザーのみがアクセスできるルート
-// Route::middleware('auth')->group(function () {
-//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-// });
+Route::middleware(['auth'])->group(function () {
+    // プロフィール編集ページの表示
+    Route::get('/mypage/profile', [ProfileEditController::class, 'index'])->name('profile.edit');
+
+    // プロフィール情報の更新処理
+    Route::post('/mypage/profile', [ProfileEditController::class, 'store'])->name('profile.update');
+});
+
+
+// Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile-edit');

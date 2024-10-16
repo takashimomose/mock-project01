@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
 
-            return redirect()->intended('/admin');
+            return redirect()->intended('/?tab=mylist');
         }
 
 
@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request) // ログアウトの処理
     {
         Auth::logout();
 

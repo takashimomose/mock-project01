@@ -9,6 +9,7 @@
 @section('content')
     <section class="wrapper">
         <h2>会員登録</h2>
+        
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <!-- お名前 -->

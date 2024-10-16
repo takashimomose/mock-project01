@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest; // フォームリクエストをインポート
 use App\Models\User;
+use Illuminate\Support\Facades\Auth; // Authファサードをインポート
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,8 +24,9 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // 他の処理（例: ログイン後にリダイレクトなど）
+        // ユーザーをログインさせる
+        Auth::login($user);
 
-        return redirect()->route('login'); // /login にリダイレクト
+        return redirect()->route('profile-edit'); // /mypage/profile にリダイレクト
     }
 }

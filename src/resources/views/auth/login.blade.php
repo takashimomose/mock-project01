@@ -3,7 +3,7 @@
 @section('title', 'ログイン') <!-- タイトルセクションを上書き -->
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 @endpush
 
 @section('content')

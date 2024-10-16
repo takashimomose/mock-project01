@@ -17,6 +17,31 @@
 </head>
 
 <body>
+    <header class="header">
+        <div class="header-wrapper">
+            <h1 class="header-logo">
+                <a href="">
+                    <img src="images/logo.svg" alt="CoachTech">
+                </a>
+            </h1>
+            <form action="" method="GET" class="header-search-form">
+                <input class="header-search-input" type="text" name="keyword" value=""
+                    placeholder="なにをお探しですか？">
+            </form>
+            <nav class="header-nav">
+                <ul class="header-nav-list">
+                    <li class="header-nav-item">
+                        <form class="form" action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit">ログアウト</button>
+                        </form>
+                    </li>
+                    <li class="header-nav-item"><a href="#mypage" class="header-nav-link">マイページ</a></li>
+                    <li class="header-nav-item"><a href="#sell" class="header-nav-link header-sell-button">出品</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <main>
         @yield('content') <!-- ここに各ページのコンテンツが挿入されます -->
     </main>
