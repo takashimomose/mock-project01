@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileEditController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SellController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -17,12 +19,12 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 // 以下はプロフィール編集画面からデータ挿入
-// Route::post('/profiles', [ProfileEditController::class, 'store'])->name('index');
+// Route::post('/profiles', [ProfileController::class, 'store'])->name('index');
 
 // 以下はログイン用
 // 認証が必要ないルート
@@ -38,11 +40,20 @@ Route::post('/register', [RegisterController::class, 'store']);
 // 認証済みのユーザーのみがアクセスできるルート
 Route::middleware(['auth'])->group(function () {
     // プロフィール編集ページの表示
-    Route::get('/mypage/profile', [ProfileEditController::class, 'index'])->name('profile.edit');
+    Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile.edit');
 
     // プロフィール情報の更新処理
-    Route::post('/mypage/profile', [ProfileEditController::class, 'store'])->name('profile.update');
+    Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.update');
+
+    // 商品出品ページの表示
+    Route::get('/sell', [SellController::class, 'index'])->name('sell.index');
+
+    // 商品出品の登録処理
+    Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
 });
+
+// IndexControllerのindexメソッドを呼び出すルート
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 
 // Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile-edit');

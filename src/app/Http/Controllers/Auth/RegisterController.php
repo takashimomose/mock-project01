@@ -27,6 +27,6 @@ class RegisterController extends Controller
         // ユーザーをログインさせる
         Auth::login($user);
 
-        return redirect()->route('profile-edit'); // /mypage/profile にリダイレクト
+        return redirect()->route('profile.edit'); // /mypage/profile にリダイレクト
     }
 }

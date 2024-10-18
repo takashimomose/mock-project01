@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class ProfileEditController extends Controller
+class ProfileController extends Controller
 {
     public function index()
     {
@@ -18,8 +18,21 @@ class ProfileEditController extends Controller
     {
         $user = Auth::user(); // 現在のユーザーを取得
         $userData = $request->only(['name', 'postal_code', 'address', 'building', 'profile_image']);
+
+        // 画像ファイルがアップロードされたかチェック
+        if ($request->hasFile('profile_image')) {
+            // アップロードされたファイルを取得
+            $file = $request->file('profile_image');
+
+            // 画像の保存先を指定
+            $path = $file->store('profile_images', 'public'); // publicディスクに保存
+
+            // データベースに画像のパスを保存
+            $userData['profile_image'] = $path; // 'profile_images/ファイル名'の形式で保存
+        }
+
         $user->update($userData); // ユーザー情報を更新
 
-        return redirect()->route('profile.edit');
+        return redirect('/?tab=mylist');
     }
 }

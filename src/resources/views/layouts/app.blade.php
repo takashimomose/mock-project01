@@ -25,7 +25,8 @@
                 </a>
             </h1>
             <form action="" method="GET" class="header-search-form">
-                <input class="header-search-input" type="text" name="keyword" value=""
+                @csrf
+                <input class="header-search-input" type="text" name="keyword" value="{{ request('keyword') }}"
                     placeholder="なにをお探しですか？">
             </form>
             <nav class="header-nav">
@@ -37,7 +38,7 @@
                         </form>
                     </li>
                     <li class="header-nav-item"><a href="#mypage" class="header-nav-link">マイページ</a></li>
-                    <li class="header-nav-item"><a href="#sell" class="header-nav-link header-sell-button">出品</a></li>
+                    <li class="header-nav-item"><a href="{{ route('sell.index') }}" class="header-nav-link header-sell-button">出品</a></li>
                 </ul>
             </nav>
         </div>

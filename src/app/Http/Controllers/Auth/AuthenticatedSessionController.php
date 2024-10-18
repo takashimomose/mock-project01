@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthenticatedSessionRequest; // フォームリクエストをインポート
+use App\Http\Requests\LoginRequest; // フォームリクエストをインポート
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(AuthenticatedSessionRequest $request) // フォームリクエストを受け取る
+    public function store(LoginRequest $request) // フォームリクエストを受け取る
     {
         $credentials = $request->validated(); // バリデーション済みのデータを取得
 
@@ -42,6 +42,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
 
-        return redirect('/');
+        return redirect('login');
     }
 }

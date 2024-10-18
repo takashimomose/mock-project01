@@ -1,0 +1,34 @@
+.error-message {
+    color: #FF5555;
+}
+
+/* ラジオボタンを非表示にする */
+input[type="radio"] {
+    display: none;
+}
+
+/* ボタン風に見せるためのスタイル */
+.category-label {
+    padding: 10px 20px;
+    margin: 5px;
+    border: 2px solid #FF5655;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #FF5655;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* マウスホバー時 */
+.category-label:hover {
+    background-color: #FF5655;
+    color: #fff;
+}
+
+/* 選択されたときのスタイル */
+input[type="radio"]:checked + .category-label {
+    background-color: #FF5655;
+    color: #fff;
+}
