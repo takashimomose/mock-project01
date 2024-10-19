@@ -41,7 +41,9 @@ Route::post('/register', [RegisterController::class, 'store']);
 // 商品詳細ページの表示
 Route::get('/item/{product_id}', [ProductController::class, 'show'])->name('product');
 // 商品詳細ページのコメントの登録処理
-Route::post('/item/{product_id}', [ProductController::class, 'store'])->middleware('auth')->name('comment.store');
+Route::post('/item/{product_id}/comment', [ProductController::class, 'store'])->middleware('auth')->name('comment.store');
+// 商品詳細ページのいいねの登録/解除処理
+Route::post('/item/{product_id}/like', [ProductController::class, 'toggleLike'])->middleware('auth')->name('product.like');
 
 // 認証済みのユーザーのみがアクセスできるルート
 Route::middleware(['auth'])->group(function () {

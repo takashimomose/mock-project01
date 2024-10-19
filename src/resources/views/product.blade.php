@@ -8,22 +8,30 @@
 
 @section('content')
     <section class="wrapper">
-        <a href="">
-            <img src="" alt=""> {{-- ここ商品画像を表示  --}}
-        </a>
+        <!-- product_image の表示方法を条件分岐で変更 -->
+        @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+            <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
+                style="max-width: 100px; max-height: 100px;">
+        @else
+            <img src="{{ Storage::url($product->product_image) }}" alt="{{ $product->product_name }}"
+                style="max-width: 100px; max-height: 100px;">
+        @endif
 
         <div class="product-details">
             <h2>{{ $product->product_name }}</h2>
             <p class="brand-name">{{ $product->brand_name }}</p>
             <p class="price">￥{{ number_format($product->price) }}（税込）</p>
-            <a href="">
-                <img src="{{ asset('images/likes.svg') }}" alt="likes">
-            </a>
-            {{-- ここにいいね数を表示  --}}
+            <form action="{{ route('product.like', ['product_id' => $product->id]) }}" method="POST" class="like-form">
+                @csrf
+                <button type="submit" class="like-button">
+                    <img src="{{ asset('images/likes.svg') }}" alt="likes">
+                </button>
+            </form>
+            <p>{{ $likeCount }}</p>
             <a href="">
                 <img src="{{ asset('images/comments.svg') }}" alt="comments">
             </a>
-            {{-- ここにコメント数を表示  --}}
+            <p>{{ $commentCount }}</p>
             <button class="proceed-purchase-btn">購入手続きへ</button>
         </div>
 
@@ -49,11 +57,15 @@
         </div>
 
         <div class="comments-section">
-            <h3>コメント</h3>
-            <div class="comment">
-                <div class="comment-user">admin</div>
-                <div class="comment-text">こちらにコメントが入ります。</div>
-            </div>
+            <h3>コメント ({{ $commentCount }})</h3>
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <img src="{{ asset('storage/' . $comment->user->profile_image) }}" alt="プロフィール画像"
+                        style="max-width: 100px; max-height: 100px;">
+                    <div class="comment-user">{{ $comment->user->name }}</div>
+                    <div class="comment-text">{{ $comment->comment }}</div>
+                </div>
+            @endforeach
         </div>
 
         <div class="comment-form">
