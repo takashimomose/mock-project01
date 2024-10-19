@@ -16,4 +16,10 @@ class Category extends Model
     protected $fillable = [
         'category_name',
     ];
+
+    // Productとの多対多リレーションを定義
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
+    }
 }

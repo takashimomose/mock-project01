@@ -24,7 +24,8 @@ class SellController extends Controller
 
     public function store(ExhibitionRequest $request)
     {
-        $sell = $request->only(['product_image', 'category_id', 'condition_id', 'product_name', 'description', 'price']);
+        // 1. products テーブルに保存するデータを用意
+        $sell = $request->only(['condition_id', 'product_name', 'description', 'price']);
         $sell['user_id'] = Auth::id(); // ログインユーザーのIDを追加
 
         // アップロードされたファイルを取得
@@ -36,7 +37,14 @@ class SellController extends Controller
         // データベースに画像のパスを保存
         $sell['product_image'] = $path; // 'product_images/ファイル名'の形式で保存
 
-        Product::create($sell);
+        // 2. Product モデルを使って保存
+        $product = Product::create($sell);
+
+        // 3. category_product テーブルに category_id を保存
+        $category_ids = $request->input('categories'); // フォームから送信された複数カテゴリID
+        if (is_array($category_ids)) {
+            $product->categories()->attach($category_ids); // 多対多リレーションで紐付け
+        }
 
         return redirect()->route('index');
     }

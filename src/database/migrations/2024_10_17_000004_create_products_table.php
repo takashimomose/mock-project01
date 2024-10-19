@@ -16,9 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('product_name')->nullable(false);
-            $table->string('brand_name')->nullable(false);
+            $table->string('brand_name')->nullable()->default(null);
             $table->integer('price')->nullable(false);
-            $table->unsignedBigInteger('category_id')->nullable(false);
             $table->unsignedBigInteger('condition_id')->nullable(false);
             $table->boolean('is_sold')->default(false);
             $table->text('description')->nullable(false);
@@ -26,12 +25,6 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             // 外部キー制約を追加、ON UPDATEおよびON DELETEをRESTRICTに設定
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onUpdate('restrict')
-                ->onDelete('restrict');
-
             $table->foreign('condition_id')
                 ->references('id')
                 ->on('conditions')

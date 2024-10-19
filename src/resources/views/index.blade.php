@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'プロフィール設定') <!-- タイトルセクションを上書き -->
+
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endpush

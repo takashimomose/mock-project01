@@ -21,7 +21,7 @@
         <div class="header-wrapper">
             <h1 class="header-logo">
                 <a href="">
-                    <img src="images/logo.svg" alt="CoachTech">
+                    <img src="{{ asset('images/logo.svg') }}" alt="CoachTech">
                 </a>
             </h1>
             <form action="" method="GET" class="header-search-form">

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'プロフィール設定') <!-- タイトルセクションを上書き -->
+@section('title', '商品出品') <!-- タイトルセクションを上書き -->
+
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/sell.css') }}">
 @endpush
@@ -27,13 +28,13 @@
                 <label for="condition">カテゴリー</label>
                 <div class="category-buttons">
                     @foreach ($categories as $category)
-                        <input type="radio" id="category_{{ $category->id }}" name="category_id"
+                        <input type="checkbox" id="category_{{ $category->id }}" name="categories[]"
                             value="{{ $category->id }}"
-                            {{ old('category_id', $oldData['category_id'] ?? '') == $category->id ? 'checked' : '' }}>
+                            {{ in_array($category->id, old('categories', $oldData['categories'] ?? [])) ? 'checked' : '' }}>
                         <label for="category_{{ $category->id }}" class="category-label">{{ $category->category_name }}</label>
                     @endforeach
                 </div>
-                @error('category_id')
+                @error('categories')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
@@ -87,6 +88,7 @@
         </form>
     </section>
 
+    {{-- 画像アップロード後のプレビュー表示 --}}
     <script>
         function previewImage(event) {
             const input = event.target;

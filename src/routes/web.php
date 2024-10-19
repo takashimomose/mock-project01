@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\ProductController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -36,6 +37,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 // 以下は新規登録用
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
+
+// 商品詳細ページの表示
+Route::get('/item/{product_id}', [ProductController::class, 'show'])->name('product');
+// 商品詳細ページのコメントの登録処理
+Route::post('/item/{product_id}', [ProductController::class, 'store'])->middleware('auth')->name('comment.store');
 
 // 認証済みのユーザーのみがアクセスできるルート
 Route::middleware(['auth'])->group(function () {

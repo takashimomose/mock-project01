@@ -17,7 +17,6 @@ class Product extends Model
         'product_name',
         'brand_name',
         'price',
-        'category_id',
         'condition_id',
         'is_sold',
         'description',
@@ -28,5 +27,17 @@ class Product extends Model
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    // Categoryとの多対多リレーションを定義
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
+    }
+
+    // Conditiionとのリレーションを定義
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class, 'condition_id');
     }
 }

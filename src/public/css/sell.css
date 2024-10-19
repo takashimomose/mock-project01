@@ -3,7 +3,7 @@
 }
 
 /* ラジオボタンを非表示にする */
-input[type="radio"] {
+input[type="checkbox"] {
     display: none;
 }
 
@@ -28,7 +28,7 @@ input[type="radio"] {
 }
 
 /* 選択されたときのスタイル */
-input[type="radio"]:checked + .category-label {
+input[type="checkbox"]:checked + .category-label {
     background-color: #FF5655;
     color: #fff;
 }

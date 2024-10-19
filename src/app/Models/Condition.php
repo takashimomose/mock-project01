@@ -16,4 +16,10 @@ class Condition extends Model
     protected $fillable = [
         'condition_name',
     ];
+
+    // productsとのリレーションを定義（逆方向）
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
