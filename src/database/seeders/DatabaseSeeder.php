@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ProductsTableSeeder::class,
             Category_ProductTableSeeder::class,
             LikesTableSeeder::class,
+            Payment_MethodsTableSeeder::class,
         ]);
     }
 }

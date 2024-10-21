@@ -8,7 +8,7 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function show()
     {
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得
         return view('profile-edit', compact('user')); // プロフィールビューを表示

@@ -20,7 +20,7 @@
         <div class="product-details">
             <h2>{{ $product->product_name }}</h2>
             <p class="brand-name">{{ $product->brand_name }}</p>
-            <p class="price">￥{{ number_format($product->price) }}（税込）</p>
+            <p class="price">¥{{ number_format($product->price) }}（税込）</p>
             <form action="{{ route('product.like', ['product_id' => $product->id]) }}" method="POST" class="like-form">
                 @csrf
                 <button type="submit" class="like-button">
@@ -32,7 +32,10 @@
                 <img src="{{ asset('images/comments.svg') }}" alt="comments">
             </a>
             <p>{{ $commentCount }}</p>
-            <button class="proceed-purchase-btn">購入手続きへ</button>
+            <button class="proceed-purchase-btn"
+                onclick="window.location='{{ route('purchase', ['product_id' => $product->id]) }}'">
+                購入手続きへ
+            </button>
         </div>
 
         <div class="product-description">

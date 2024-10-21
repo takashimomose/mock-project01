@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -23,9 +24,6 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 // Route::get('/', function () {
 //     return view('index');
 // });
-
-// 以下はプロフィール編集画面からデータ挿入
-// Route::post('/profiles', [ProfileController::class, 'store'])->name('index');
 
 // 以下はログイン用
 // 認証が必要ないルート
@@ -45,10 +43,12 @@ Route::post('/item/{product_id}/comment', [ProductController::class, 'store'])->
 // 商品詳細ページのいいねの登録/解除処理
 Route::post('/item/{product_id}/like', [ProductController::class, 'toggleLike'])->middleware('auth')->name('product.like');
 
+
+
 // 認証済みのユーザーのみがアクセスできるルート
 Route::middleware(['auth'])->group(function () {
     // プロフィール編集ページの表示
-    Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile.edit');
+    Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.edit');
 
     // プロフィール情報の更新処理
     Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.update');
@@ -58,10 +58,16 @@ Route::middleware(['auth'])->group(function () {
 
     // 商品出品の登録処理
     Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
+
+    // 商品購入ページの表示
+    Route::get('/purchase/{product_id}', [PurchaseController::class, 'show'])->name('purchase');
+    
+    // 送付先住所変更ページの表示
+    Route::get('/purchase/address/{product_id}', [PurchaseController::class, 'showDeliveryAddress'])->name('delivery-address.show');
+
+    // 送付先住所変更ページからセッション保存
+    Route::post('/purchase/address/{product_id}', [PurchaseController::class, 'storeDeliveryAddress'])->name('delivery-address.store');
 });
 
 // IndexControllerのindexメソッドを呼び出すルート
 Route::get('/', [IndexController::class, 'index'])->name('index');
-
-
-// Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile-edit');
