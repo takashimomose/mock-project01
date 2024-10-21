@@ -61,7 +61,10 @@ Route::middleware(['auth'])->group(function () {
 
     // 商品購入ページの表示
     Route::get('/purchase/{product_id}', [PurchaseController::class, 'show'])->name('purchase');
-    
+
+    // 商品購入処理
+    Route::post('/purchase/{product_id}', [PurchaseController::class, 'store'])->name('purchase.store');
+
     // 送付先住所変更ページの表示
     Route::get('/purchase/address/{product_id}', [PurchaseController::class, 'showDeliveryAddress'])->name('delivery-address.show');
 

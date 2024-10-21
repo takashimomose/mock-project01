@@ -28,54 +28,58 @@
         <hr>
 
         <!-- Payment Method -->
-        <div class="section">
-            <h2>支払い方法</h2>
-            <select name="paymentMethod_id" id="paymentMethodSelect">
-                <option value="" selected hidden>選択してください</option>
-                @foreach ($paymentMethods as $paymentMethod)
-                    <option value="{{ $paymentMethod->id }}"
-                        {{ request('paymentMethod_id') == $paymentMethod->id ? 'selected' : '' }}>
-                        {{ $paymentMethod->method_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <!-- Shipping Info -->
-        <div class="section">
-            <h2>配送先</h2>
-            @if (session('delivery_address_data'))
-                <!-- セッションにデータがある場合 -->
-                <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}-{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
-                    {{ session('delivery_address_data')['address'] }}{{ session('delivery_address_data')['building'] ? ' ' . session('delivery_address_data')['building'] : '' }}
-                </p>
-            @else
-                <!-- セッションにデータがない場合 -->
-                <p>〒{{ substr($user->postal_code, 0, 3) }}-{{ substr($user->postal_code, 3) }}<br>
-                    {{ $user->address }}{{ $user->building ? ' ' . $user->building : '' }}
-                </p>
-            @endif
-            <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}" class="change-link">変更する</a>
-        </div>
-        </div>
-        </div>
-
-        <!-- Right Column -->
-        <div class="right-column">
-            <div class="summary">
-                <div class="summary-item">
-                    <h2>商品代金</h2>
-                    <p>¥{{ number_format($product->price) }}</p>
-                </div>
-                <div class="summary-item">
-                    <h2>支払い方法</h2>
-                    <p id="selectedPaymentMethod">未選択</ｐ>
-                    <h2>コンビニ払い</h2>
-                </div>
+        <form method="POST" action="{{ route('purchase.store', ['product_id' => $product->id]) }}">
+            @csrf
+            <div class="section">
+                <h2>支払い方法</h2>
+                <select name="paymentMethod_id" id="paymentMethodSelect">
+                    <option value="" selected hidden>選択してください</option>
+                    @foreach ($paymentMethods as $paymentMethod)
+                        <option value="{{ $paymentMethod->id }}"
+                            {{ request('paymentMethod_id') == $paymentMethod->id ? 'selected' : '' }}>
+                            {{ $paymentMethod->method_name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('paymentMethod_id')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
-            <button class="purchase-button">購入する</button>
-        </div>
 
+            <!-- Shipping Info -->
+            <div class="section">
+                <h2>配送先</h2>
+                @if (session('delivery_address_data'))
+                    <!-- セッションにデータがある場合 -->
+                    <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}-{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
+                        {{ session('delivery_address_data')['address'] }}{{ session('delivery_address_data')['building'] ? ' ' . session('delivery_address_data')['building'] : '' }}
+                    </p>
+                @else
+                    <!-- セッションにデータがない場合 -->
+                    <p>〒{{ substr($user->postal_code, 0, 3) }}-{{ substr($user->postal_code, 3) }}<br>
+                        {{ $user->address }}{{ $user->building ? ' ' . $user->building : '' }}
+                    </p>
+                @endif
+                <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}" class="change-link">変更する</a>
+            </div>
+            </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="summary">
+                    <div class="summary-item">
+                        <h2>商品代金</h2>
+                        <p>¥{{ number_format($product->price) }}</p>
+                    </div>
+                    <div class="summary-item">
+                        <h2>支払い方法</h2>
+                        <p id="selectedPaymentMethod">未選択</ｐ>
+                    </div>
+                </div>
+                <button class="purchase-button" type="submit">購入する</button>
+            </div>
+        </form>
         {{-- セッションが来ているかただの確認用 --}}
         @if (session('delivery_address_data'))
             <div>
