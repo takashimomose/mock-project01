@@ -34,7 +34,7 @@ class PurchaseController extends Controller
     }
 
     // 送付先住所変更ページの表示
-    public function showDeliveryAddress($product_id)
+    public function showDeliveryAddress(Request $request, $product_id)
     {
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得
 

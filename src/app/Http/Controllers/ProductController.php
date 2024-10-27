@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Like;
@@ -32,7 +33,7 @@ class ProductController extends Controller
         return view('product', compact('product', 'comments', 'commentCount', 'likeCount'));
     }
 
-    public function store(Request $request, $product_id)
+    public function store(CommentRequest $request, $product_id)
     {
         // 現在ログインしているユーザーを取得
         $user = Auth::user();

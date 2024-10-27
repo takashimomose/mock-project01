@@ -10,16 +10,14 @@ use App\Models\Product;
 
 class SellController extends Controller
 {
-    public function index()
+    public function show()
     {
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得
-
-        // return view('sell', compact('user')); // プロフィールビューを表示
 
         $categories = Category::all();
         $conditions = Condition::all(); // 条件を取得
 
-        return view('sell', ['categories' => $categories, 'conditions' => $conditions]);
+        return view('sell', ['user' => $user, 'categories' => $categories, 'conditions' => $conditions]);
     }
 
     public function store(ExhibitionRequest $request)

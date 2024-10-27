@@ -21,18 +21,17 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-// 以下はログイン用
 // 認証が必要ないルート
+// IndexControllerのindexメソッドを呼び出すルート
+Route::get('/', [IndexController::class, 'index'])->name('index');
+
+// ログイン
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
-// 以下は新規登録用
+// 新規登録
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -47,14 +46,17 @@ Route::post('/item/{product_id}/like', [ProductController::class, 'toggleLike'])
 
 // 認証済みのユーザーのみがアクセスできるルート
 Route::middleware(['auth'])->group(function () {
+    // プロフィールページの表示
+    Route::get('/mypage', [ProfileController::class, 'show'])->name('profile');
+
     // プロフィール編集ページの表示
-    Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.edit');
+    Route::get('/mypage/profile', [ProfileController::class, 'showProfileEdit'])->name('profile.edit');
 
     // プロフィール情報の更新処理
     Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.update');
 
     // 商品出品ページの表示
-    Route::get('/sell', [SellController::class, 'index'])->name('sell.index');
+    Route::get('/sell', [SellController::class, 'show'])->name('sell.show');
 
     // 商品出品の登録処理
     Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
@@ -71,6 +73,3 @@ Route::middleware(['auth'])->group(function () {
     // 送付先住所変更ページからセッション保存
     Route::post('/purchase/address/{product_id}', [PurchaseController::class, 'storeDeliveryAddress'])->name('delivery-address.store');
 });
-
-// IndexControllerのindexメソッドを呼び出すルート
-Route::get('/', [IndexController::class, 'index'])->name('index');

@@ -1,0 +1,157 @@
+.error-message {
+    color: #FF5555;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* 左右のセクションの間にスペースを追加 */
+    max-width: 1540px;
+    /* 最大横幅を1540pxに制限 */
+    padding: 70px 70px;
+    /* 余白を調整 */
+}
+
+.left-section {
+    width: 62%;
+    /* 左右にバランスよく幅を取る */
+}
+
+.right-section {
+    width: 30%;
+    /* 左右にバランスよく幅を取る */
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.product img {
+    max-width: 170px;
+    max-height: 170px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.product-info h1 {
+    margin: 0 0 15px 0;
+    font-size: 30px;
+}
+
+.product-price {
+    margin: 0;
+    font-size: 30px;
+}
+
+.payment-section {
+    padding: 20px;
+    border-top: 1px solid;
+}
+
+.payment-section h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.payment-section select {
+    margin: 20px 0 20px 40px;
+}
+
+.payment-section p {
+    margin-left: 40px;
+    font-weight: 700;
+}
+
+.delivery-address-section {
+    padding: 20px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.delivery-address-section h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.delivery-address-section select {
+    margin: 20px 0 20px 40px;
+}
+
+.delivery-address-section p {
+    margin-left: 40px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.delivery-address-header {
+    display: flex;
+    align-items: center;
+    /* h2とaを上下中央に揃える */
+}
+
+.delivery-address-header h2 {
+    margin-right: 10px;
+    /* h2とaの間にスペースを追加 */
+}
+
+.delivery-address-header a {
+    margin-left: auto;
+    /* aタグを右端に配置 */
+    text-decoration: none;
+    color: #0073CC;
+    font-size: 20px;
+}
+
+.summary {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    border-left: 1px solid;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: center; /* 中央に配置 */
+    align-items: center;
+    /* h2とaを上下中央に揃える */
+    border-top: 1px solid;
+    border: bottom 1px solid;
+}
+
+.summary-item h2 {
+    margin-right: 10px;
+    /* h2とaの間にスペースを追加 */
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.summary-item p {
+    font-size: 24px;
+}
+
+.purchase-btn {
+    width: 100%;
+    /* 親要素の幅に合わせる */
+    padding: 10px;
+    /* 内側の余白 */
+    margin: 30px 0 20px 0;
+    color: #FFF;
+    background-color: #FF5555;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}

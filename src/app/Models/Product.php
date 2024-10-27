@@ -14,6 +14,7 @@ class Product extends Model
 
     // 保存可能なカラムを指定
     protected $fillable = [
+        'user_id',
         'product_name',
         'brand_name',
         'price',

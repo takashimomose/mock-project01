@@ -1,5 +1,154 @@
-.error-message {
+/* すべての要素にボックスサイズを指定 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    max-width: 1540px;
+    /* 最大横幅を1540pxに制限 */
+    margin: 0 auto;
+    /* 中央揃え */
+    padding: 0 25px;
+    /* 余白を調整 */
+    display: flex;
+    /* Flexboxを適用 */
+    justify-content: center;
+    /* 子要素を左右中央に揃える */
+    height: 100vh;
+    /* 画面全体の高さを確保して、中央に配置 */
+}
+
+.product-sell {
+    width: 100%;
+    max-width: 750px;
+    /* セクションの最大横幅を制限 */
+    padding: 20px;
+    /* 内側の余白 */
+    border-radius: 8px;
+    /* 角丸 */
+    text-align: left;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 1px solid #5F5F5F;
+    color: #5F5F5F;
+}
+
+.product-image-group {
+    display: flex;
+    flex-direction: column;
+    /* 要素を縦に並べる */
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    /* Add some space between the image and the button */
+}
+
+.product-image-label {
+    display: block;
+    /* ラベルをブロック要素にして全幅を占める */
+}
+
+.product-image-wrapper {
+    display: flex;
+    justify-content: center;
+    /* 左右中央揃え */
+    align-items: center;
+    /* 上下中央揃え */
+    border: dotted 1px #5F5F5F;
+    width: 100%;
+    height: 150px;
+    flex-direction: column;
+    /* 画像選択ラベルとプレビュー画像を縦に並べる */
+    gap: 20px;
+}
+
+.image-preview img {
+    display: block;
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: cover;
+    /* プレビュー画像を枠に収める */
+}
+
+.product-image-upload {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #FFF;
     color: #FF5555;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.product-image-upload:hover {
+    color: #FFF;
+    background-color: #FF5555;
+}
+
+/* 中央揃え */
+.category-buttons {
+    display: inline-block;
+    margin: 0 auto 30px auto;
+}
+
+/* inputとlabelを左揃えにする */
+.category-buttons input,
+.category-buttons label {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    margin-right: 10px;
+    /* inputとlabelの間に余白を追加 */
+}
+
+
+.form-group {
+    display: flex;
+    /* Flexboxを適用 */
+    flex-direction: column;
+    /* 子要素を縦に並べる */
+}
+
+.form-label {
+    display: block;
+    text-align: left; 
+    margin-bottom: 5px;
+    /* ラベルと入力フィールドの間に少し余白を追加 */
+    font-weight: 700;
+}
+
+.form-input {
+    width: 100%;
+    /* 入力フィールドを親要素の幅に合わせる */
+    padding: 10px;
+    /* 入力フィールド内側の余白 */
+    margin-bottom: 30px;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.primary-btn {
+    width: 100%;
+    /* 親要素の幅に合わせる */
+    padding: 10px;
+    /* 内側の余白 */
+    margin: 30px 0 20px 0;
+    color: #FFF;
+    background-color: #FF5555;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 /* ラジオボタンを非表示にする */
@@ -9,7 +158,7 @@ input[type="checkbox"] {
 
 /* ボタン風に見せるためのスタイル */
 .category-label {
-    padding: 10px 20px;
+    padding: 5px 20px;
     margin: 5px;
     border: 2px solid #FF5655;
     border-radius: 30px;
@@ -17,6 +166,7 @@ input[type="checkbox"] {
     display: inline-block;
     background-color: #f8f9fa;
     color: #FF5655;
+    font-size: 12px;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -28,7 +178,11 @@ input[type="checkbox"] {
 }
 
 /* 選択されたときのスタイル */
-input[type="checkbox"]:checked + .category-label {
+input[type="checkbox"]:checked+.category-label {
     background-color: #FF5655;
     color: #fff;
+}
+
+.error-message {
+    color: #FF5555;
 }

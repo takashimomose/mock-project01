@@ -12,10 +12,8 @@
         <input id="all" type="radio" name="tab-item" {{ request('tab') !== 'mylist' ? 'checked' : '' }}>
         <label class="tab-item" for="all" onclick="changeTab('all-products')">おすすめ</label>
 
-        @if (Auth::check())
-            <input id="likes" type="radio" name="tab-item" {{ request('tab') === 'mylist' ? 'checked' : '' }}>
-            <label class="tab-item" for="likes" onclick="changeTab('mylist')">マイリスト</label>
-        @endif
+        <input id="likes" type="radio" name="tab-item" {{ request('tab') === 'mylist' ? 'checked' : '' }}>
+        <label class="tab-item" for="likes" onclick="changeTab('mylist')">マイリスト</label>
 
         <!-- 商品一覧タブ -->
         <div class="tab-content" id="all-content"
@@ -24,17 +22,19 @@
                 <ul>
                     @foreach ($products as $product)
                         <li>
-                            <!-- product_image の表示方法を条件分岐で変更 -->
-                            @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                                <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
-                                    style="max-width: 100px; max-height: 100px;">
-                            @else
-                                <img src="{{ Storage::url($product->product_image) }}" alt="{{ $product->product_name }}"
-                                    style="max-width: 100px; max-height: 100px;">
-                            @endif
+                            <a href="{{ url('item/' . $product->id) }}">
+                                <!-- product_image の表示方法を条件分岐で変更 -->
+                                @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                                    <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
+                                        style="max-width: 100px; max-height: 100px;">
+                                @else
+                                    <img src="{{ Storage::url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}" style="max-width: 100px; max-height: 100px;">
+                                @endif
 
-                            <!-- 動的に product_name を表示 -->
-                            <h3 class="product-name">{{ $product->product_name }}</h3>
+                                <!-- 動的に product_name を表示 -->
+                                <h3 class="product-name">{{ $product->product_name }}</h3>
+                            </a>
                         </li>
                     @endforeach
                 </ul>
@@ -53,14 +53,17 @@
                     <ul>
                         @foreach ($likedProducts as $product)
                             <li>
-                                @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                                    <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
-                                        style="max-width: 100px; max-height: 100px;">
-                                @else
-                                    <img src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}" style="max-width: 100px; max-height: 100px;">
-                                @endif
-                                <h3>{{ $product->product_name }}</h3>
+                                <a href="{{ url('item/' . $product->id) }}">
+                                    @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                                        <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
+                                            style="max-width: 100px; max-height: 100px;">
+                                    @else
+                                        <img src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}"
+                                            style="max-width: 100px; max-height: 100px;">
+                                    @endif
+                                    <h3>{{ $product->product_name }}</h3>
+                                </a>
                                 <!-- is_soldがtrueの場合にSOLDを表示 -->
                                 @if ($product->is_sold)
                                     <span class="sold-label">SOLD</span>
