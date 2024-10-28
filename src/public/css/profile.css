@@ -40,8 +40,8 @@
 }
 
 .current-profile-image {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 50%;
     /* 画像を丸く切り取る */
     object-fit: cover;
@@ -55,6 +55,7 @@
     /* h1 と button の間のスペース */
     white-space: nowrap;
     /* テキストが折り返さないようにする */
+    font-size: 36px;
 }
 
 .edit-profile-btn {
@@ -64,12 +65,13 @@
     color: #FF5555;
     border: 2px solid #FF5555;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 26px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
     white-space: nowrap;
     /* テキストが折り返さないようにする */
+    height: 60px;
 }
 
 .profile-image-upload:hover {
@@ -107,7 +109,7 @@
     background-color: #FFF;
     color: #5F5F5F;
     line-height: 50px;
-    font-size: 16px;
+    font-size: 24px;
     text-align: center;
     display: block;
     float: left;
@@ -186,6 +188,7 @@ input[name="tab-item"] {
 
 .product-list p {
     margin: 0;
+    font-size: 25px;
 }
 
 .product-list a {
@@ -221,5 +224,14 @@ input[name="tab-item"] {
         /* 画面が狭いときは2カラムにする */
         max-width: 720px;
         /*  最大幅を指定（必要に応じて調整） */
+    }
+
+    .current-profile-image {
+        margin-right: 40px;
+    }
+
+    .profile-image-group h1 {
+        margin-right: 40px;
+        /* h1 と button の間のスペース */
     }
 }

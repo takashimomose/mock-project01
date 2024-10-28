@@ -60,19 +60,19 @@
         <section class="item">
             <div class="tab-content" id="likes-content" style="{{ $tab === 'buy' ? 'display:block;' : 'display:none;' }}">
                 @if (Auth::check())
-                    <ul>
+                    <ul class="product-list">
                         @foreach ($purchasedProducts as $product)
                             <li>
                                 <a href="{{ url('item/' . $product->id) }}">
-                                    @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                                        <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}"
-                                            style="max-width: 100px; max-height: 100px;">
-                                    @else
-                                        <img src="{{ Storage::url($product->product_image) }}"
-                                            alt="{{ $product->product_name }}"
-                                            style="max-width: 100px; max-height: 100px;">
-                                    @endif
-                                    <h3>{{ $product->product_name }}</h3>
+                                    <div class="image-container">
+                                        @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                                            <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
+                                        @else
+                                            <img src="{{ Storage::url($product->product_image) }}"
+                                                alt="{{ $product->product_name }}">
+                                        @endif
+                                    </div>
+                                    <p>{{ $product->product_name }}</p>
                                 </a>
                             </li>
                         @endforeach

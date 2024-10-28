@@ -12,6 +12,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 
+    <style>
+        /* デフォルトの画像 */
+        .responsive-logo {
+            content: url("{{ asset('images/logo.svg') }}");
+        }
+
+        /* 画面幅が1110px以下の場合に切り替え */
+        @media (max-width: 1110px) {
+            .responsive-logo {
+                content: url("{{ asset('images/logo-tablet.svg') }}");
+            }
+        }
+    </style>
+
     <!-- 各ページで追加のCSSを読み込む -->
     @stack('css')
 </head>
@@ -21,7 +35,7 @@
         <div class="header-wrapper">
             <h1 class="header-logo">
                 <a href="{{ route('index') }}">
-                    <img src="{{ asset('images/logo.svg') }}" alt="CoachTech">
+                    <img src="{{ asset('images/logo.svg') }}" class="responsive-logo" alt="CoachTech">
                 </a>
             </h1>
             @auth <!-- ログインしている場合のみ表示 -->

@@ -33,11 +33,13 @@
 
 h1 {
     text-align: center;
+    font-size: 36px;
 }
 
 h2 {
     border-bottom: 1px solid #5F5F5F;
     color: #5F5F5F;
+    font-size: 30px;
 }
 
 .product-image-group {
@@ -79,7 +81,7 @@ h2 {
 
 .product-image-upload {
     display: inline-block;
-    padding: 5px 15px;
+    padding: 8px 20px;
     background-color: #FFF;
     color: #FF5555;
     border: 2px solid #FF5555;
@@ -125,6 +127,7 @@ h2 {
     margin-bottom: 5px;
     /* ラベルと入力フィールドの間に少し余白を追加 */
     font-weight: 700;
+    font-size: 24px;
 }
 
 .form-input {
@@ -145,7 +148,7 @@ h2 {
     color: #FFF;
     background-color: #FF5555;
     font-family: "Noto Sans JP", sans-serif;
-    font-size: 16px;
+    font-size: 26px;
     border: none;
     font-weight: 700;
     cursor: pointer;
@@ -166,7 +169,7 @@ input[type="checkbox"] {
     display: inline-block;
     background-color: #f8f9fa;
     color: #FF5655;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
