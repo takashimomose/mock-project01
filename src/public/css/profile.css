@@ -147,6 +147,10 @@ input[name="tab-item"] {
     /* 最大幅を制限 */
     margin: 0 auto;
     /* 中央揃え */
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
 }
 
 
@@ -197,6 +201,43 @@ input[name="tab-item"] {
 
 .product-list a:hover {
     text-decoration: underline; /* ホバー時に下線を表示したい場合はこの行を追加 */
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end; /* ページネーションは右端に揃う */
+    list-style-type: none; /* 箇条書きの・を非表示にする */
+}
+
+/* Bootstrapを使用。ページネーションの基本スタイル */
+.page-item .page-link {
+    color: #000; /* 文字色 */
+    background-color: #fff; /* 背景色 */
+    border: 1px solid #000; /* ボーダー色 */
+    padding: 10px 20px; /* 内側の余白 */
+    border-radius: none; /* 角丸をなくす */
+    font-size: 18px; /* フォントサイズ */
+    text-decoration: none; /* 下線を消す */
+}
+
+/* ホバー時のスタイル */
+.page-item .page-link:hover {
+    background-color: #000; /* ホバー時の背景色 */
+    color: #FFF; /* ホバー時の文字色 */
+}
+
+/* アクティブページのスタイル */
+.page-item.active .page-link {
+    background-color: #000; /* アクティブページの背景色 */
+    color: #fff; /* アクティブページの文字色 */
+    border-color: #000; /* アクティブページのボーダー色 */
+}
+
+/* 無効化されたページのスタイル */
+.page-item.disabled .page-link {
+    color: #000; /* 無効化されたページの文字色 */
+    background-color: #FFF; /* 無効化されたページの背景色 */
+    border-color: #000; /* 無効化されたページのボーダー色 */
 }
 
 @media (max-width: 1400px) {
