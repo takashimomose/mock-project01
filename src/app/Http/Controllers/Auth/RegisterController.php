@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest; // フォームリクエストをインポート
 use App\Models\User;
-use Illuminate\Support\Facades\Auth; // Authファサードをインポート
+use Illuminate\Auth\Events\Registered; // Registeredイベントをインポート
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -24,9 +23,9 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // ユーザーをログインさせる
-        Auth::login($user);
+        // Registeredイベントを発火して認証メールを送信
+        event(new Registered($user));
 
-        return redirect()->route('profile.edit'); // /mypage/profile にリダイレクト
+        return redirect()->route('verification.notice'); // 認証待ちページにリダイレクト
     }
 }

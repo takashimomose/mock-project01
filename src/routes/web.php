@@ -8,7 +8,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+use Illuminate\Http\Request; // Requestクラスをインポート
+use App\Models\User; // Userモデルをインポート
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,21 @@ Route::middleware(['auth'])->group(function () {
     // 送付先住所変更ページからセッション保存
     Route::post('/purchase/address/{product_id}', [PurchaseController::class, 'storeDeliveryAddress'])->name('delivery-address.store');
 });
+
+// メール認証
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
+
+// ユーザーがメール認証を行うためのルート
+Route::get('/email/verify/{id}/{hash}', function (Request $request) {
+    $user = User::findOrFail($request->route('id'));
+
+    if (! hash_equals((string) $request->route('hash'), sha1($user->email))) {
+        throw new \Illuminate\Validation\ValidationException('Invalid email verification link.');
+    }
+
+    $user->markEmailAsVerified();
+
+    return redirect()->route('login')->with('verified', true);
+})->middleware(['signed'])->name('verification.verify');
