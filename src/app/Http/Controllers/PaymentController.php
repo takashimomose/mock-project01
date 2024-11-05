@@ -33,23 +33,47 @@ class PaymentController extends Controller
         // セッションにデータを保存
         session(['order_data' => $data]);
 
-        // Stripe Checkout セッションを作成
-        $checkout_session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'jpy',
-                    'product_data' => [
-                        'name' => $product->product_name,
+        // payment_method_idに応じて異なるStripeセッションを作成
+        if ($data['method_id'] == 1) {
+            // コンビニ決済
+            $checkout_session = Session::create([
+                'payment_method_types' => ['konbini'], // コンビニ決済の指定
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $product->product_name,
+                        ],
+                        'unit_amount' => $product->price,
                     ],
-                    'unit_amount' => $product->price, // Stripeでは最小単位で指定
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('purchase.success', ['product_id' => $product->id]), // PurchaseControllerのsuccessメソッドにリダイレクト
-            'cancel_url' => route('purchase.cancel'),
-        ]);
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => route('purchase.success', ['product_id' => $product->id]),
+                'cancel_url' => route('purchase.cancel'),
+            ]);
+        } elseif ($data['method_id'] == 2) {
+            // クレジットカード決済
+            $checkout_session = Session::create([
+                'payment_method_types' => ['card'], // カード決済の指定
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $product->product_name,
+                        ],
+                        'unit_amount' => $product->price,
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => route('purchase.success', ['product_id' => $product->id]),
+                'cancel_url' => route('purchase.cancel'),
+            ]);
+        } else {
+            // 不正なpayment_method_idの場合の処理（エラーを表示するなど）
+            return redirect()->back()->withErrors(['message' => '無効な支払い方法です。']);
+        }
 
         // Stripeの決済画面にリダイレクト
         return redirect($checkout_session->url);

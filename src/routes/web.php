@@ -74,6 +74,11 @@ Route::middleware(['auth'])->group(function () {
 
     // 送付先住所変更ページからセッション保存
     Route::post('/purchase/address/{product_id}', [PurchaseController::class, 'storeDeliveryAddress'])->name('delivery-address.store');
+
+    // 支払いと購入
+    Route::post('/checkout/{product_id}', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/purchase/success/{product_id}', [PurchaseController::class, 'success'])->name('purchase.success');
+    Route::get('/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
 });
 
 // メール認証
@@ -93,8 +98,3 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
 
     return redirect()->route('login')->with('verified', true);
 })->middleware(['signed'])->name('verification.verify');
-
-// 支払いと購入
-Route::post('/checkout/{product_id}', [PaymentController::class, 'checkout'])->name('checkout');
-Route::get('/purchase/success/{product_id}', [PurchaseController::class, 'success'])->name('purchase.success');
-Route::get('/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
