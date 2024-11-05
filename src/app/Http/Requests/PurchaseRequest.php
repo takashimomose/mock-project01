@@ -24,7 +24,7 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'paymentMethod_id' => ['required'], // 支払い方法が必須であることを確認
+            'payment_method_id' => ['required'], // 支払い方法が必須であることを確認
         ];
     }
 
@@ -36,7 +36,7 @@ class PurchaseRequest extends FormRequest
     public function messages()
     {
         return [
-            'paymentMethod_id.required' => '支払い方法を選択してください。',
+            'payment_method_id.required' => '支払い方法を選択してください',
         ];
     }
 }

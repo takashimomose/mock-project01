@@ -22,22 +22,22 @@
                 </div>
             </div>
             <!-- Payment Method -->
-            <form method="POST" action="{{ route('purchase.store', ['product_id' => $product->id]) }}">
+            <form method="POST" action="{{ route('checkout', ['product_id' => $product->id]) }}">
                 @csrf
                 <div class="payment-section">
                     <h2>支払い方法</h2>
-                    <select name="paymentMethod_id" id="paymentMethodSelect">
+                    <select name="payment_method_id" id="paymentMethodSelect">
                         <option value="" selected hidden>選択してください</option>
                         @foreach ($paymentMethods as $paymentMethod)
                             <option value="{{ $paymentMethod->id }}"
-                                {{ request('paymentMethod_id') == $paymentMethod->id ? 'selected' : '' }}>
+                                {{ request('payment_method_id') == $paymentMethod->id ? 'selected' : '' }}>
                                 {{ $paymentMethod->method_name }}
                             </option>
                         @endforeach
-                        @error('paymentMethod_id')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
                     </select>
+                    @error('payment_method_id')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Shipping Info -->

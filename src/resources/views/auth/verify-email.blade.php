@@ -3,7 +3,7 @@
 @section('title', 'メールアドレス認証') <!-- タイトルセクションを上書き -->
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/verify-email.blade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/verify-email.css') }}">
 @endpush
 
 @section('content')

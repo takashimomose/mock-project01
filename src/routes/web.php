@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Http\Request; // Requestクラスをインポート
 use App\Models\User; // Userモデルをインポート
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,8 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
 
     return redirect()->route('login')->with('verified', true);
 })->middleware(['signed'])->name('verification.verify');
+
+// 支払いと購入
+Route::post('/checkout/{product_id}', [PaymentController::class, 'checkout'])->name('checkout');
+Route::get('/purchase/success/{product_id}', [PurchaseController::class, 'success'])->name('purchase.success');
+Route::get('/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');

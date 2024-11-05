@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AddressRequest;
-use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
-use App\Models\User;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Session;
@@ -40,10 +38,10 @@ class PurchaseController extends Controller
 
         return view('delivery-address', compact('user', 'product_id')); // 送付先住所変更ページのビューを表示
     }
+
     // 送付先住所変更ページでのセッション保存
     public function storeDeliveryAddress(AddressRequest $request, $product_id)
     {
-
         $deliveryAddress = $request->only(['postal_code', 'address', 'building']);
 
         // セッションにデータを保存
@@ -52,8 +50,8 @@ class PurchaseController extends Controller
         return redirect()->route('purchase', ['product_id' => $product_id]);
     }
 
-    // 商品購入ページでの購入
-    public function store(PurchaseRequest $request, $product_id)
+    // Stripe決済成功後の注文保存処理
+    public function success(Request $request, $product_id)
     {
         // 現在のユーザーを取得
         $user = Auth::user();
@@ -65,27 +63,36 @@ class PurchaseController extends Controller
             'building' => $user->building,
         ]);
 
+        // セッションから注文データを取得
+        $orderData = Session::get('order_data');
+
         // 商品の詳細を取得
         $product = Product::findOrFail($product_id);
 
         // 新しい注文を作成
         Order::create([
-            'user_id' => $user->id,
-            'user_name' => $user->name,
+            'user_id' => $orderData['user_id'],
+            'user_name' => $orderData['user_name'],
             'product_id' => $product->id,
-            'product_name' => $product->product_name,
-            'product_price' => $product->price,
-            'method_id' => $request->input('paymentMethod_id'), // 支払い方法の選択
+            'product_name' => $orderData['product_name'],
+            'product_price' => $orderData['product_price'],
+            'method_id' => $orderData['method_id'],
             'delivery_postal_code' => $deliveryAddress['postal_code'],
             'delivery_address' => $deliveryAddress['address'],
             'delivery_building' => $deliveryAddress['building'],
-            'order_date' => Carbon::now(), // 現在の日時
+            'order_date' => Carbon::now(),
         ]);
 
-        // ユーザーのis_soldをtrueに更新
+        // 商品のis_soldをtrueに更新
         $product->update(['is_sold' => true]);
 
         // 購入後のリダイレクト
-        return redirect()->route('index'); // 適切なリダイレクト先を設定
+        return redirect()->route('index')->with('message', '購入が完了しました。');
+    }
+
+    // 決済キャンセル時の処理
+    public function cancel()
+    {
+        return view('cancel');
     }
 }
