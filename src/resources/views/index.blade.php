@@ -33,6 +33,10 @@
                             <!-- 動的に product_name を表示 -->
                             <h3 class="product-name">{{ $product->product_name }}</h3>
                         </a>
+                        <!-- is_soldがtrueの場合にSOLDを表示 -->
+                        @if ($product->is_sold)
+                            <span class="sold-label">SOLD</span>
+                        @endif
                     </li>
                 @endforeach
             </ul>

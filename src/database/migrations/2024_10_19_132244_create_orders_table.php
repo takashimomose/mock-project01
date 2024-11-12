@@ -16,10 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id(); // 主キー
             $table->unsignedBigInteger('user_id'); // 注文者ID（usersテーブルへの外部キー）
-            $table->string('user_name'); // 注文者名前
             $table->unsignedBigInteger('product_id'); // 商品ID（productsテーブルへの外部キー）
-            $table->string('product_name'); // 商品名
-            $table->decimal('product_price', 10, 2); // 商品代金
             $table->unsignedBigInteger('method_id'); // 支払い方法ID（payment_methodsテーブルへの外部キー）
             $table->string('delivery_postal_code'); // 配送先郵便番号
             $table->string('delivery_address'); // 配送先住所

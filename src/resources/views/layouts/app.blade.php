@@ -38,26 +38,36 @@
                     <img src="{{ asset('images/logo.svg') }}" class="responsive-logo" alt="CoachTech">
                 </a>
             </h1>
-            @auth <!-- ログインしている場合のみ表示 -->
-                <form action="" method="GET" class="header-search-form">
-                    @csrf
-                    <input class="header-search-input" type="text" name="keyword" value="{{ request('keyword') }}"
-                        placeholder="なにをお探しですか？">
-                </form>
-                <nav class="header-nav">
-                    <ul class="header-nav-list">
+            <!-- ログインしている場合もしていない場合も表示 -->
+            <form action="" method="GET" class="header-search-form">
+                @csrf
+                <input class="header-search-input" type="text" name="keyword" value="{{ request('keyword') }}"
+                    placeholder="なにをお探しですか？">
+            </form>
+            <nav class="header-nav">
+                <ul class="header-nav-list">
+                    @if (Auth::check())
+                        <!-- ログインしている場合 -->
                         <li class="header-nav-item">
                             <form class="header-nav-logout" action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button type="submit">ログアウト</button>
                             </form>
                         </li>
-                        <li class="header-nav-item"><a href="{{ route('profile') }}" class="header-nav-link">マイページ</a></li>
-                        <li class="header-nav-item"><a href="{{ route('sell.show') }}" class="header-sell-button">出品</a>
+                    @else
+                        <!-- ログインしていない場合 -->
+                        <li class="header-nav-item">
+                            <form class="header-nav-logout" action="{{ route('login') }}" method="post">
+                                @csrf
+                                <button type="submit">ログイン</button>
+                            </form>
                         </li>
-                    </ul>
-                </nav>
-            @endauth
+                    @endif
+                    <li class="header-nav-item"><a href="{{ route('profile') }}" class="header-nav-link">マイページ</a></li>
+                    <li class="header-nav-item"><a href="{{ route('sell.show') }}" class="header-sell-button">出品</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
     @yield('content') <!-- ここに各ページのコンテンツが挿入されます -->

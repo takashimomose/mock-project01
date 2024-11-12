@@ -47,6 +47,8 @@
                         <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}"
                             class="change-link">変更する</a>
                     </div>
+
+                    <!-- 配送先住所の表示 -->
                     @if (session('delivery_address_data'))
                         <!-- セッションにデータがある場合 -->
                         <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}-{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
@@ -68,12 +70,12 @@
                 </div>
                 <div class="summary-item">
                     <h2>支払い方法</h2>
-                    <p id="selectedPaymentMethod">未選択</ｐ>
+                    <p id="selectedPaymentMethod">未選択</p>
                 </div>
             </div>
             <button class="purchase-btn" type="submit">購入する</button>
         </section>
-        </form>
+    </form>
     </main>
 
     <script>

@@ -22,10 +22,12 @@ class User extends Authenticatable implements MustVerifyEmail // ← MustVerifyE
         'name',
         'email',
         'password',
-        'postal_code', // 追加
-        'address',     // 追加
-        'building',    // 追加
-        'profile_image', // 追加
+        'postal_code',
+        'address',
+        'building',
+        'profile_image', 
+        'email_verified_at', 
+        'last_login_at', 
     ];
 
     /**

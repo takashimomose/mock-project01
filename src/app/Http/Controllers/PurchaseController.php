@@ -39,6 +39,18 @@ class PurchaseController extends Controller
         return view('delivery-address', compact('user', 'product_id')); // 送付先住所変更ページのビューを表示
     }
 
+    public function storePaymentMethod(Request $request, $product_id)
+    {
+        $paymentMethodId = $request->input('payment_method_id'); // 直接値を取得
+
+        // セッションに支払い方法を保存
+        Session::put('payment_method_id', $paymentMethodId);
+
+        // 支払い方法が変更された後、配送先住所変更ページへリダイレクト
+        return redirect()->route('delivery-address.show', ['product_id' => $product_id]);
+    }
+
+
     // 送付先住所変更ページでのセッション保存
     public function storeDeliveryAddress(AddressRequest $request, $product_id)
     {
@@ -72,10 +84,7 @@ class PurchaseController extends Controller
         // 新しい注文を作成
         Order::create([
             'user_id' => $orderData['user_id'],
-            'user_name' => $orderData['user_name'],
             'product_id' => $product->id,
-            'product_name' => $orderData['product_name'],
-            'product_price' => $orderData['product_price'],
             'method_id' => $orderData['method_id'],
             'delivery_postal_code' => $deliveryAddress['postal_code'],
             'delivery_address' => $deliveryAddress['address'],

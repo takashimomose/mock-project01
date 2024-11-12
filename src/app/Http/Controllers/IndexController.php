@@ -17,9 +17,8 @@ class IndexController extends Controller
         // 入力された条件を取得
         $keyword = $request->input('keyword');
 
-        // 商品が売れてない商品情報を取得
-        $productsQuery = Product::where('is_sold', false)
-            ->select('id', 'product_name', 'product_image');
+        // 全商品を取得
+        $productsQuery = Product::select('id', 'is_sold', 'product_name', 'product_image');
 
         // ログインしている場合、ユーザーが出品した商品を除外
         if (Auth::check()) {

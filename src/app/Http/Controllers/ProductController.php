@@ -29,8 +29,11 @@ class ProductController extends Controller
         // いいね数を取得
         $likeCount = Like::where('product_id', $product_id)->count();
 
+        // ユーザーがその商品に「いいね」をしているか確認
+        $isLiked = Like::where('product_id', $product_id)->where('user_id', Auth::id())->exists();
+
         // 取得したデータをビューに渡す
-        return view('product', compact('product', 'comments', 'commentCount', 'likeCount'));
+        return view('product', compact('product', 'comments', 'commentCount', 'likeCount', 'isLiked'));
     }
 
     public function store(CommentRequest $request, $product_id)

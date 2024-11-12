@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/{product_id}', [PaymentController::class, 'checkout'])->name('checkout');
     Route::get('/purchase/success/{product_id}', [PurchaseController::class, 'success'])->name('purchase.success');
     Route::get('/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
+
+    // これさっきセッション保存用についかしたやつ
+    Route::post('/payment/store/{product_id}', [PurchaseController::class, 'storePaymentMethod'])->name('payment.store');
 });
 
 // メール認証

@@ -30,7 +30,13 @@
                             class="like-form">
                             @csrf
                             <button type="submit" class="like-button">
-                                <img src="{{ asset('images/likes.svg') }}" alt="likes">
+                                @if ($isLiked)
+                                    <!-- いいねしている場合は黄色い画像 -->
+                                    <img src="{{ asset('images/likes-yellow.svg') }}" alt="likes">
+                                @else
+                                    <!-- いいねしていない場合は通常の画像 -->
+                                    <img src="{{ asset('images/likes.svg') }}" alt="likes">
+                                @endif
                         </form>
                         <p>{{ $likeCount }}</p>
                     </div>

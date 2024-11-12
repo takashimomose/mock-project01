@@ -65,6 +65,7 @@
                         更新する
                     </button>
                 </div>
+            </form>
         </section>
     </main>
 @endsection
