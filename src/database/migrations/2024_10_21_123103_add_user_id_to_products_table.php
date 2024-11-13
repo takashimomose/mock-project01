@@ -15,7 +15,7 @@ class AddUserIdToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             // user_id カラムを追加（unsignedBigInteger）
-            $table->unsignedBigInteger('user_id')->nullable()->after('id');
+            $table->unsignedBigInteger('user_id')->after('id');
 
             // 外部キー制約（users テーブルの id に関連）
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
