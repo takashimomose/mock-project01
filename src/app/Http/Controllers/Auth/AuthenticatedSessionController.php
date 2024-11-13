@@ -11,7 +11,7 @@ use Illuminate\Auth\Events\Registered; // Registeredイベントをインポー�
 
 class AuthenticatedSessionController extends Controller
 {
-    public function create()
+    public function show()
     {
         return view('auth.login');
     }

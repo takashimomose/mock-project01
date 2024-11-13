@@ -40,9 +40,9 @@
                 <!-- 郵便番号 -->
                 <div class="form-group">
                     <label for="postal_code" class="form-label">郵便番号</label>
-                    <input class="form-input" type="number" name="postal_code" placeholder="例: 3998205"
-                        value="{{ old('postal_code', $user->postal_code) }}" pattern="[0-9]*" inputmode="numeric"
-                        maxlength="7">
+                    <input class="form-input" type="text" name="postal_code" placeholder="例: 150-0000" 
+                           value="{{ old('postal_code', $user->postal_code) }}" pattern="[0-9]{3}-[0-9]{4}" 
+                           inputmode="numeric" maxlength="8">
                 </div>
 
                 <!-- 住所 -->

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name', 255)->nullable(false);
             $table->string('email', 255)->nullable(false);
             $table->string('password', 255)->nullable(false);
-            $table->string('postal_code', 7)->nullable(); // 郵便番号（7桁まで）
+            $table->string('postal_code', 8)->nullable(); // 郵便番号（ハイフン込み8桁まで）
             $table->string('address', 255)->nullable(); // 住所
             $table->string('building', 255)->nullable(); // 建物名
             $table->string('profile_image', 255)->nullable(); // プロフィール画像の場所

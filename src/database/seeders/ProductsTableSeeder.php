@@ -22,6 +22,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg',
                 'condition_id' => 1,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'HDD',
@@ -30,6 +33,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '高速で信頼性の高いハードディスク',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg',
                 'condition_id' => 2,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => '玉ねぎ3束',
@@ -38,6 +44,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/iLoveIMG+d.jpg',
                 'condition_id' => 3,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => '革靴',
@@ -46,6 +55,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'クラシックなデザインの革靴',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg',
                 'condition_id' => 4,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'ノートPC',
@@ -54,6 +66,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '高性能なノートパソコン',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg',
                 'condition_id' => 1,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'マイク',
@@ -62,6 +77,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '高音質のレコーディング用マイク',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
                 'condition_id' => 2,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'ショルダーバッグ',
@@ -70,6 +88,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'おしゃれなショルダーバッグ',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg',
                 'condition_id' => 3,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'タンブラー',
@@ -78,6 +99,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '使いやすいタンブラー',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Tumbler+souvenir.jpg',
                 'condition_id' => 4,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'コーヒーミル',
@@ -86,6 +110,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '手動のコーヒーミル',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg',
                 'condition_id' => 1,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'product_name' => 'メイクセット',
@@ -94,6 +121,9 @@ class ProductsTableSeeder extends Seeder
                 'description' => '便利なメイクアップセット',
                 'product_image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg',
                 'condition_id' => 2,
+                'user_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

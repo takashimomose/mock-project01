@@ -81,7 +81,7 @@ body {
     font-family: "Noto Sans JP", sans-serif; /* フォントファミリを指定 */
 }
 
-.header-nav-link {
+.header-nav-login, .header-nav-link {
     color: #fff;
     text-decoration: none;
     font-size: 24px;

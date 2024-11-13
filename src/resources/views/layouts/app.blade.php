@@ -57,10 +57,7 @@
                     @else
                         <!-- ログインしていない場合 -->
                         <li class="header-nav-item">
-                            <form class="header-nav-logout" action="{{ route('login') }}" method="post">
-                                @csrf
-                                <button type="submit">ログイン</button>
-                            </form>
+                            <a class="header-nav-login" href="{{ route('login') }}">ログイン</a>
                         </li>
                     @endif
                     <li class="header-nav-item"><a href="{{ route('profile') }}" class="header-nav-link">マイページ</a></li>
