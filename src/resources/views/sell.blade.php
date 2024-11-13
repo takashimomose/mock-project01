@@ -100,18 +100,16 @@
     {{-- 画像アップロード後のプレビュー表示 --}}
     <script>
         function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('preview');
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById('preview');
+                const imagePreviewWrapper = document.querySelector('.image-preview');
 
-            // 画像が選択された場合
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result; // プレビュー用の画像を設定
-                    preview.style.display = 'block'; // プレビューを表示
-                }
-                reader.readAsDataURL(input.files[0]); // 画像ファイルを読み込む
+                preview.src = reader.result;
+                preview.style.display = 'block';
+                imagePreviewWrapper.style.display = 'flex'; // アップロード後に表示
             }
+            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 @endsection
