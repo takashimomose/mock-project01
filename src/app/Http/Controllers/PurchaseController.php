@@ -59,6 +59,29 @@ class PurchaseController extends Controller
         // セッションにデータを保存
         Session::put('delivery_address_data', $deliveryAddress);
 
+        // 現在ログイン中のユーザーを取得
+        $user = Auth::user();
+
+        // usersテーブルのpostal_code, address, buildingがnullの場合にデータを保存
+        if ($user) {
+            $updateData = [];
+
+            if (is_null($user->postal_code)) {
+                $updateData['postal_code'] = $deliveryAddress['postal_code'];
+            }
+            if (is_null($user->address)) {
+                $updateData['address'] = $deliveryAddress['address'];
+            }
+            if (is_null($user->building)) {
+                $updateData['building'] = $deliveryAddress['building'];
+            }
+
+            // 必要なデータがあれば更新
+            if (!empty($updateData)) {
+                $user->update($updateData);
+            }
+        }
+
         return redirect()->route('purchase', ['product_id' => $product_id]);
     }
 
