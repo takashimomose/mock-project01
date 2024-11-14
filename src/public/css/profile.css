@@ -196,11 +196,12 @@ input[name="tab-item"] {
 }
 
 .product-list a {
-    text-decoration: none; /* 下線を消す */
+    text-decoration: none;
+    color: #000;
 }
 
 .product-list a:hover {
-    text-decoration: underline; /* ホバー時に下線を表示したい場合はこの行を追加 */
+    text-decoration: none; /* ホバー時に下線を表示したい場合はこの行を追加 */
 }
 
 .pagination {
