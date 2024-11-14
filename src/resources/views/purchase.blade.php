@@ -46,7 +46,7 @@
                     <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}" class="change-link">変更する</a>
                 </div>
                 @if (session('delivery_address_data'))
-                    <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}-{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
+                    <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
                         {{ session('delivery_address_data')['address'] }}{{ session('delivery_address_data')['building'] ? ' ' . session('delivery_address_data')['building'] : '' }}
                     </p>
                 @else
