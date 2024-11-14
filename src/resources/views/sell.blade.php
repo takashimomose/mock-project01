@@ -16,8 +16,13 @@
                 <label for="product-image-label" class="form-label">商品画像</label>
                 <div class="product-image-group">
                     <div class="product-image-wrapper">
-                        <div class="image-preview">
-                            <img id="preview" src="#" alt="Image Preview" style="display: none;">
+                        <div class="image-preview"
+                            style="display: {{ Session::has('product_image_path') || old('product_image') ? 'flex' : 'none' }};">
+                            @if (Session::has('product_image_path') || old('product_image'))
+                                <img id="preview" src="{{ asset('storage/' . (Session::get('product_image_path') ?? '')) }}" alt="Image Preview">
+                            @else
+                                <img id="preview" src="#" alt="Image Preview" style="display: none;">
+                            @endif
                         </div>
                         <label for="product-image" class="product-image-upload">
                             画像を選択する
@@ -38,8 +43,7 @@
                             <input type="checkbox" id="category_{{ $category->id }}" name="categories[]"
                                 value="{{ $category->id }}"
                                 {{ in_array($category->id, old('categories', $oldData['categories'] ?? [])) ? 'checked' : '' }}>
-                            <label for="category_{{ $category->id }}"
-                                class="category-label">{{ $category->category_name }}</label>
+                            <label for="category_{{ $category->id }}" class="category-label">{{ $category->category_name }}</label>
                         @endforeach
                     </div>
                     @error('categories')
@@ -107,7 +111,7 @@
 
                 preview.src = reader.result;
                 preview.style.display = 'block';
-                imagePreviewWrapper.style.display = 'flex'; // アップロード後に表示
+                imagePreviewWrapper.style.display = 'flex';
             }
             reader.readAsDataURL(event.target.files[0]);
         }
