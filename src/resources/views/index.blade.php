@@ -31,7 +31,7 @@
                             @endif
 
                             <!-- 動的に product_name を表示 -->
-                            <h3 class="product-name">{{ $product->product_name }}</h3>
+                            <p class="product-name">{{ $product->product_name }}</p>
                         </a>
                         <!-- is_soldがtrueの場合にSOLDを表示 -->
                         @if ($product->is_sold)
@@ -59,7 +59,7 @@
                                     <img src="{{ Storage::url($product->product_image) }}"
                                         alt="{{ $product->product_name }}">
                                 @endif
-                                <h3>{{ $product->product_name }}</h3>
+                                <p class="product-name">{{ $product->product_name }}</p>
                             </a>
                             <!-- is_soldがtrueの場合にSOLDを表示 -->
                             @if ($product->is_sold)
