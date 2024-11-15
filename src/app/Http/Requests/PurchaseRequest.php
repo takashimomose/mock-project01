@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequest extends FormRequest
 {
@@ -37,12 +38,18 @@ class PurchaseRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            // セッションに配送先情報が存在するか確認
-            if (!session()->has('delivery_address_data.postal_code') ||
-                !session()->has('delivery_address_data.address') ||
-                !session()->has('delivery_address_data.building')) {
+            $user = Auth::user(); // 現在ログインしているユーザーを取得
+
+            // users テーブルの配送先情報を確認
+            if (empty($user->postal_code)) {
                 $validator->errors()->add('delivery_postal_code', '配送先の郵便番号が必要です');
+            }
+
+            if (empty($user->address)) {
                 $validator->errors()->add('delivery_address', '配送先の住所が必要です');
+            }
+
+            if (empty($user->building)) {
                 $validator->errors()->add('delivery_building', '配送先の建物名が必要です');
             }
         });
