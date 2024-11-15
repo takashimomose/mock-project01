@@ -80,8 +80,14 @@
                 <h2 class="comment-label">コメント ({{ $commentCount }})</h2>
                 @foreach ($comments as $comment)
                     <div class="comment">
-                        <img class="current-profile-image" src="{{ asset('storage/' . $comment->user->profile_image) }}"
-                            alt="プロフィール画像">
+                        @if ($comment->user->profile_image)
+                            <!-- プロフィール画像がある場合 -->
+                            <img class="current-profile-image"
+                                src="{{ asset('storage/' . $comment->user->profile_image) }}" alt="プロフィール画像">
+                        @else
+                            <!-- プロフィール画像がない場合にグレーの円を表示 -->
+                            <img class="placeholder-profile-image">
+                        @endif
                         <p class="comment-user">{{ $comment->user->name }}</p>
                     </div>
                     <p class="comment-text">{{ $comment->comment }}</p>

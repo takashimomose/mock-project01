@@ -184,6 +184,14 @@ h2 {
     /* img と p の間のスペース */
 }
 
+.placeholder-profile-image {
+    width: 70px;           /* 円の幅 */
+    height: 70px;          /* 円の高さ */
+    background-color: #ccc; /* グレーの背景色 */
+    border-radius: 50%;     /* 円形にする */
+    margin-right: 20px;
+}
+
 .comment-user {
     font-weight: 700;
     font-size: 30px;
