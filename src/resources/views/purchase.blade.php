@@ -43,17 +43,29 @@
             <div class="delivery-address-section">
                 <div class="delivery-address-header">
                     <h2>配送先</h2>
-                    <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}" class="change-link">変更する</a>
+                    <a href="{{ route('delivery-address.show', ['product_id' => $product->id]) }}"
+                        class="change-link">変更する</a>
                 </div>
                 @if (session('delivery_address_data'))
                     <p>〒{{ substr(session('delivery_address_data')['postal_code'], 0, 3) }}{{ substr(session('delivery_address_data')['postal_code'], 3) }}<br>
                         {{ session('delivery_address_data')['address'] }}{{ session('delivery_address_data')['building'] ? ' ' . session('delivery_address_data')['building'] : '' }}
                     </p>
                 @else
-                    <p>〒{{ substr($user->postal_code, 0, 3) }}-{{ substr($user->postal_code, 3) }}<br>
+                    <p>〒{{ substr($user->postal_code, 0, 3) }}{{ substr($user->postal_code, 3) }}<br>
                         {{ $user->address }}{{ $user->building ? ' ' . $user->building : '' }}
                     </p>
                 @endif
+                <ul class="error-list">
+                    @error('delivery_postal_code')
+                        <li class="error-message">{{ $message }}</li>
+                    @enderror
+                    @error('delivery_address')
+                        <li class="error-message">{{ $message }}</li>
+                    @enderror
+                    @error('delivery_building')
+                        <li class="error-message">{{ $message }}</li>
+                    @enderror
+                </ul>
             </div>
         </section>
 

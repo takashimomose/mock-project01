@@ -156,3 +156,9 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+.error-list {
+    list-style-type: none; /* マーカーを非表示にする */
+    padding: 0; /* 左の余白もなくす */
+    margin: 0; /* 上下の余白も調整可能 */
+}
