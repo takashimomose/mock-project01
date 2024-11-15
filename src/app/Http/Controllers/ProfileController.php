@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -43,28 +44,56 @@ class ProfileController extends Controller
 
     public function showProfileEdit()
     {
+        // バリデーションエラーがない場合のみセッションをクリア
+        if (!Session::has('errors')) {
+            Session::forget('profile_image_path');
+        }
+
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得
         return view('profile-edit', compact('user')); // プロフィールビューを表示
     }
 
-    public function store(ProfileRequest $request)
+    public function store(Request $request)
     {
         $user = Auth::user(); // 現在のユーザーを取得
         $userData = $request->only(['name', 'postal_code', 'address', 'building', 'profile_image']);
 
-        // 画像ファイルがアップロードされたかチェック
+        // 画像ファイルのアップロード
+        $path = null;
         if ($request->hasFile('profile_image')) {
-            // アップロードされたファイルを取得
+            // 画像ファイルが選択されていれば保存
             $file = $request->file('profile_image');
-
-            // 画像の保存先を指定
             $path = $file->store('profile_images', 'public'); // publicディスクに保存
 
-            // データベースに画像のパスを保存
-            $userData['profile_image'] = $path; // 'profile_images/ファイル名'の形式で保存
+            // 画像のパスをセッションに保存
+            Session::put('profile_image_path', $path);
+        } elseif (Session::has('profile_image_path')) {
+            // バリデーションエラー後に再送信した場合、セッションに保存された画像パスを使用
+            $path = Session::get('profile_image_path');
         }
 
+        // 商品画像がアップロードされていない場合でも、セッションに保存されたパスを使用して、バリデーションを回避
+        $rules = [
+            'name' => 'required',
+            'profile_image' => 'mimes:jpeg,png',
+        ];
+
+        // 画像がアップロードされている場合のみ、画像のバリデーションを追加
+        if ($request->hasFile('profile_image')) {
+            $rules['profile_image'] = 'required|mimes:jpeg,png';
+        }
+
+        // バリデーションの実行
+        $request->validate($rules);
+
+        // データベースに画像のパスを保存
+        $userData['profile_image'] = $path; // 'profile_images/ファイル名'の形式で保存
+
+
         $user->update($userData); // ユーザー情報を更新
+
+        // セッションから画像パスを削除
+        Session::forget('profile_image_path');
 
         return redirect('/?tab=mylist');
     }

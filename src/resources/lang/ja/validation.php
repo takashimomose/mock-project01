@@ -2,6 +2,12 @@
 
 return [
     'custom' => [
+        'name' => [
+            'required' => 'ユーザー名を入力してください',
+        ],
+        'profile_image' => [
+            'mimes' => 'プロフィール画像はjpegまたはpng形式でアップロードしてください',
+        ],
         'product_image' => [
             'required' => '商品画像をアップロードしてください',
             'mimes' => '商品画像はjpegまたはpng形式でアップロードしてください',

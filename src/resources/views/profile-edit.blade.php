@@ -15,16 +15,25 @@
                 @csrf
                 <!-- プロフィール画像 -->
                 <div class="profile-image-group">
-                    <!-- アップロード済みの画像があれば表示 -->
-                    @if (Auth::user()->profile_image)
-                        <img class="current-profile-image" src="{{ asset('storage/' . Auth::user()->profile_image) }}"
-                            alt="プロフィール画像">
-                    @endif
-                    <label for="profile_image" class="profile-image-upload">
+                    <!-- セッションに画像パスがある場合はプレビュー画像を表示 -->
+                    <div class="image-preview">
+                        @if (Session::has('profile_image_path'))
+                            <img img id="preview" class="current-profile-image"
+                                src="{{ asset('storage/' . Session::get('profile_image_path')) }}" alt="プロフィール画像">
+                            <!-- ユーザーがアップロードした画像がある場合はその画像を表示 -->
+                        @elseif (Auth::user()->profile_image)
+                            <img img id="preview" class="current-profile-image" src="{{ asset('storage/' . Auth::user()->profile_image) }}"
+                                alt="プロフィール画像">
+                        @else
+                            <!-- プロフィール画像がない場合にグレーの円を表示 -->
+                            <div class="placeholder-profile-image"></div>
+                        @endif
+                    </div>
+                    <label for="profile-image" class="profile-image-upload">
                         画像を選択する
                     </label>
-                    <input id="profile_image" class="profile-image" type="file" name="profile_image" accept="image/*"
-                        style="display: none;">
+                    <input type="file" id="profile-image" name="profile_image" accept="image/*" style="display: none;"
+                        onchange="previewImage(event)">
                 </div>
                 @error('profile_image')
                     <div class="error-message">{{ $message }}</div>
@@ -35,14 +44,17 @@
                     <label for="name" class="form-label">ユーザー名</label>
                     <input class="form-input" type="text" name="name" placeholder=""
                         value="{{ old('name', $user->name) }}" />
+                    @error('name')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- 郵便番号 -->
                 <div class="form-group">
                     <label for="postal_code" class="form-label">郵便番号</label>
-                    <input class="form-input" type="text" name="postal_code" placeholder="例: 150-0000" 
-                           value="{{ old('postal_code', $user->postal_code) }}" pattern="[0-9]{3}-[0-9]{4}" 
-                           inputmode="numeric" maxlength="8">
+                    <input class="form-input" type="text" name="postal_code" placeholder="例: 150-0000"
+                        value="{{ old('postal_code', $user->postal_code) }}" pattern="[0-9]{3}-[0-9]{4}" inputmode="numeric"
+                        maxlength="8">
                 </div>
 
                 <!-- 住所 -->
@@ -68,4 +80,19 @@
             </form>
         </section>
     </main>
+    {{-- 画像アップロード後のプレビュー表示 --}}
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById('preview');
+                const imagePreviewWrapper = document.querySelector('.image-preview');
+
+                preview.src = reader.result;
+                preview.style.display = 'block';
+                imagePreviewWrapper.style.display = 'flex';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 @endsection

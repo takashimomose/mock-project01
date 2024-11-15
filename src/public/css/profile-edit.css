@@ -44,8 +44,8 @@ h1 {
 }
 
 .current-profile-image {
-    max-width: 100px;
-    max-height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%; /* 画像を丸く切り取る */
     object-fit: cover; /* 画像を枠内に収めて表示 */
 }
@@ -66,6 +66,14 @@ h1 {
 .profile-image-upload:hover {
     color: #FFF;
     background-color: #FF5555;
+}
+
+.placeholder-profile-image {
+    width: 100px;           /* 円の幅 */
+    height: 100px;          /* 円の高さ */
+    background-color: #ccc; /* グレーの背景色 */
+    border-radius: 50%;     /* 円形にする */
+    margin-right: 20px;
 }
 
 .error-message {
