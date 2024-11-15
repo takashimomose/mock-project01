@@ -42,15 +42,15 @@ class PurchaseRequest extends FormRequest
 
             // users テーブルの配送先情報を確認
             if (empty($user->postal_code)) {
-                $validator->errors()->add('delivery_postal_code', '配送先の郵便番号が必要です');
+                $validator->errors()->add('delivery_postal_code', '配送先の郵便番号を入力してください');
             }
 
             if (empty($user->address)) {
-                $validator->errors()->add('delivery_address', '配送先の住所が必要です');
+                $validator->errors()->add('delivery_address', '配送先の住所を入力してください');
             }
 
             if (empty($user->building)) {
-                $validator->errors()->add('delivery_building', '配送先の建物名が必要です');
+                $validator->errors()->add('delivery_building', '配送先の建物名を入力してください');
             }
         });
     }
