@@ -26,7 +26,7 @@
                                 alt="プロフィール画像">
                         @else
                             <!-- プロフィール画像がない場合にグレーの円を表示 -->
-                            <div class="placeholder-profile-image"></div>
+                            <img img id="preview" class="placeholder-profile-image">
                         @endif
                     </div>
                     <label for="profile-image" class="profile-image-upload">

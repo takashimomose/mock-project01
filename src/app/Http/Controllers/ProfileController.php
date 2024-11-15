@@ -67,6 +67,9 @@ class ProfileController extends Controller
 
             // 画像のパスをセッションに保存
             Session::put('profile_image_path', $path);
+        } elseif ($user->profile_image) {
+            // 新しい画像が選択されていない場合は、既存の画像パスを保持
+            $path = $user->profile_image;
         } elseif (Session::has('profile_image_path')) {
             // バリデーションエラー後に再送信した場合、セッションに保存された画像パスを使用
             $path = Session::get('profile_image_path');
@@ -95,6 +98,6 @@ class ProfileController extends Controller
         // セッションから画像パスを削除
         Session::forget('profile_image_path');
 
-        return redirect('/?tab=mylist');
+        return redirect('/');
     }
 }
