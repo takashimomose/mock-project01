@@ -22,8 +22,8 @@
                                 src="{{ asset('storage/' . Session::get('profile_image_path')) }}" alt="プロフィール画像">
                             <!-- ユーザーがアップロードした画像がある場合はその画像を表示 -->
                         @elseif (Auth::user()->profile_image)
-                            <img img id="preview" class="current-profile-image" src="{{ asset('storage/' . Auth::user()->profile_image) }}"
-                                alt="プロフィール画像">
+                            <img img id="preview" class="current-profile-image"
+                                src="{{ asset('storage/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
                         @else
                             <!-- プロフィール画像がない場合にグレーの円を表示 -->
                             <img img id="preview" class="placeholder-profile-image">
@@ -53,8 +53,11 @@
                 <div class="form-group">
                     <label for="postal_code" class="form-label">郵便番号</label>
                     <input class="form-input" type="text" name="postal_code" placeholder="例: 150-0000"
-                        value="{{ old('postal_code', $user->postal_code) }}" pattern="[0-9]{3}-[0-9]{4}" inputmode="numeric"
+                        value="{{ old('postal_code', $user->postal_code) }}" inputmode="numeric"
                         maxlength="8">
+                    @error('postal_code')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- 住所 -->

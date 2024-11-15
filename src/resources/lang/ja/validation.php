@@ -8,6 +8,9 @@ return [
         'profile_image' => [
             'mimes' => 'プロフィール画像はjpegまたはpng形式でアップロードしてください',
         ],
+        'postal_code' => [
+            'regex' => '郵便番号はハイフンを含めて「3桁-4桁」の形式で入力してください',
+        ],
         'product_image' => [
             'required' => '商品画像をアップロードしてください',
             'mimes' => '商品画像はjpegまたはpng形式でアップロードしてください',
