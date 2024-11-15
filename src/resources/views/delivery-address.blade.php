@@ -17,7 +17,7 @@
                 {{-- 郵便番号 --}}
                 <div class="form-group">
                     <label for="postal_code" class="form-label">郵便番号</label>
-                    <input class="form-input" type="text" name="postal_code" placeholder="例: 3998205"
+                    <input class="form-input" type="text" name="postal_code" placeholder="例: 150-0000"
                         value="{{ old('postal_code', session('delivery_address_data.postal_code', $user->postal_code)) }}"
                         inputmode="numeric" maxlength="8">
                     @error('postal_code')

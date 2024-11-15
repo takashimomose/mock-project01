@@ -79,7 +79,7 @@ class ProfileController extends Controller
         $rules = [
             'name' => 'required',
             'profile_image' => 'mimes:jpeg,png',
-            'postal_code' => 'regex:/^\d{3}-\d{4}$/',
+            'postal_code' => 'nullable|regex:/^\d{3}-\d{4}$/',
         ];
 
         // 画像がアップロードされている場合のみ、画像のバリデーションを追加
