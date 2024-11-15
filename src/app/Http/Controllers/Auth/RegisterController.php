@@ -12,6 +12,10 @@ class RegisterController extends Controller
 {
     public function create()
     {
+        if (auth()->check()) {
+            return redirect('/'); // ログインしている場合は / にリダイレクト
+        }
+        
         return view('auth.register'); // 新規登録ビューを表示
     }
 

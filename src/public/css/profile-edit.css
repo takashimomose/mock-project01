@@ -38,7 +38,7 @@ h1 {
 .profile-image-group {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 30px;
     margin-bottom: 40px;
     /* Add some space between the image and the button */
 }

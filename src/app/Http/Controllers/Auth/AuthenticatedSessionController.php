@@ -13,6 +13,10 @@ class AuthenticatedSessionController extends Controller
 {
     public function show()
     {
+        if (auth()->check()) {
+            return redirect('/'); // ログインしている場合は / にリダイレクト
+        }
+        
         return view('auth.login');
     }
 
