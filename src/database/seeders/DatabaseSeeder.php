@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             ConditionsTableSeeder::class,
             ProductsTableSeeder::class,
-            Category_ProductTableSeeder::class,
+            CategoryProductTableSeeder::class,
             PaymentMethodsTableSeeder::class,
         ]);
     }
