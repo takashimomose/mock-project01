@@ -190,7 +190,3 @@ input[type="checkbox"]:checked+.category-label {
     background-color: #FF5655;
     color: #fff;
 }
-
-.error-message {
-    color: #FF5555;
-}

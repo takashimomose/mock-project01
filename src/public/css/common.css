@@ -8,6 +8,10 @@ body {
     font-family: "Noto Sans JP", sans-serif;
 }
 
+.error-message {
+    color: #FF5555;
+}
+
 .header {
     background-color: #000; /* 背景色を画面全体に適用 */
     padding: 10px 0; /* ヘッダー内の上下の余白を設定 */
