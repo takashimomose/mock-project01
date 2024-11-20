@@ -24,8 +24,20 @@
     /* 左右にバランスよく幅を取る */
 }
 
-.product-image img {
-    width: 100%;
+.image-container {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 650px;
+    height: 650px;
+}
+
+.image-container img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 縦長・横長の画像に対応 */
 }
 
 .product-details h1 {

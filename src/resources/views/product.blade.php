@@ -10,12 +10,14 @@
     <main class="wrapper">
         <section class="left-section">
             <div class="product-image">
-                <!-- product_image の表示方法を条件分岐で変更 -->
-                @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                    <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
-                @else
-                    <img src="{{ Storage::url($product->product_image) }}" alt="{{ $product->product_name }}">
-                @endif
+                <div class="image-container">
+                    <!-- product_image の表示方法を条件分岐で変更 -->
+                    @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                        <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
+                    @else
+                        <img src="{{ Storage::url($product->product_image) }}" alt="{{ $product->product_name }}">
+                    @endif
+                </div>
             </div>
         </section>
 
