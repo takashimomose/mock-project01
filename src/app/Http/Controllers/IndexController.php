@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
-use App\Models\Like;
 
 class IndexController extends Controller
 {
+    private const ITEMS_PER_PAGE = 8;
+
     public function index(Request $request)
     {
         // 現在ログインしているユーザーを取得（ログインしていない場合は null）
@@ -32,8 +33,7 @@ class IndexController extends Controller
             });
         }
 
-        // ページネーションで8件に制限
-        $products = $productsQuery->paginate(8);
+        $products = $productsQuery->paginate(self::ITEMS_PER_PAGE);
 
         // ログインしている場合のみ、いいねした商品のproduct_nameとproduct_imageを取得
         $likedProducts = [];
@@ -50,7 +50,7 @@ class IndexController extends Controller
                 });
             }
 
-            $likedProducts = $likedProductsQuery->paginate(8); // ページネーションで8件に制限
+            $likedProducts = $likedProductsQuery->paginate(self::ITEMS_PER_PAGE);
         }
 
         // ビューにデータを渡す
