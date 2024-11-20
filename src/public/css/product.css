@@ -186,8 +186,8 @@ h2 {
 }
 
 .current-profile-image {
-    max-width: 70px;
-    max-height: 70px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     /* 画像を丸く切り取る */
     object-fit: cover;
