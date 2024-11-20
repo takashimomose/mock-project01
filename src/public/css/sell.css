@@ -31,12 +31,12 @@
     text-align: left;
 }
 
-h1 {
+.product-sell h1 {
     text-align: center;
     font-size: 36px;
 }
 
-h2 {
+.product-sell h2 {
     border-bottom: 1px solid #5F5F5F;
     color: #5F5F5F;
     font-size: 30px;
