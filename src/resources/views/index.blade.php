@@ -23,13 +23,15 @@
                 @foreach ($products as $product)
                     <li>
                         <a href="{{ url('item/' . $product->id) }}">
-                            <!-- product_image の表示方法を条件分岐で変更 -->
-                            @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                                <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
-                            @else
-                                <img src="{{ Storage::url($product->product_image) }}" alt="{{ $product->product_name }}">
-                            @endif
-
+                            <div class="image-container">
+                                <!-- product_image の表示方法を条件分岐で変更 -->
+                                @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                                    <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
+                                @else
+                                    <img src="{{ Storage::url($product->product_image) }}"
+                                        alt="{{ $product->product_name }}">
+                                @endif
+                            </div>
                             <!-- 動的に product_name を表示 -->
                             <p class="product-name">{{ $product->product_name }}</p>
                         </a>
@@ -53,12 +55,15 @@
                     @foreach ($likedProducts as $product)
                         <li>
                             <a href="{{ url('item/' . $product->id) }}">
-                                @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
-                                    <img src="{{ $product->product_image }}" alt="{{ $product->product_name }}">
-                                @else
-                                    <img src="{{ Storage::url($product->product_image) }}"
-                                        alt="{{ $product->product_name }}">
-                                @endif
+                                <div class="image-container">
+                                    @if (filter_var($product->product_image, FILTER_VALIDATE_URL))
+                                        <img class="product-image" src="{{ $product->product_image }}"
+                                            alt="{{ $product->product_name }}">
+                                    @else
+                                        <img class="product-image" src="{{ Storage::url($product->product_image) }}"
+                                            alt="{{ $product->product_name }}">
+                                    @endif
+                                </div>
                                 <p class="product-name">{{ $product->product_name }}</p>
                             </a>
                             <!-- is_soldがtrueの場合にSOLDを表示 -->
