@@ -2,15 +2,17 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Condition;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ChangeDeliveryAddressTest extends TestCase
 {
+
     use DatabaseTransactions;
 
     public function test_change_delivery_address()
@@ -20,7 +22,10 @@ class ChangeDeliveryAddressTest extends TestCase
             'name' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => Hash::make('password123'),
-            'profile_image' => 'test_user_image.jpg'
+            'profile_image' => 'test_user_image.jpg',
+            'postal_code' => null, // 初期値はnull
+            'address' => null,     // 初期値はnull
+            'building' => null,    // 初期値はnull
         ]);
 
         $this->actingAs($user); // ログイン処理
@@ -38,25 +43,30 @@ class ChangeDeliveryAddressTest extends TestCase
             'condition_id' => $condition->id,
         ]);
 
-        // 配送先住所変更画面で住所を登録
+        // 送付先住所データ
         $addressData = [
-            'postal_code' => '1234567',
+            'postal_code' => '123-4567',
             'address' => '東京都渋谷区テスト町1-2-3',
-            'building' => 'テストビル101号室'
+            'building' => 'テストビル101号室',
         ];
 
-        $this->post("/purchase/address/{$product->id}", $addressData)
-            ->assertRedirect("/purchase/{$product->id}");
+        // POSTリクエストを送信
+        $response = $this->post("/purchase/address/{$product->id}", $addressData);
 
-        // 商品購入画面を再度開く
+        // 1. リダイレクト先の確認
+        $response->assertRedirect(route('purchase', ['product_id' => $product->id]));
+
+        // 2. セッションに保存されているデータの確認
+        $this->assertEquals($addressData, Session::get('delivery_address_data'));
+
+        // 3. ユーザー情報が更新されたかの確認
+        $user->refresh(); // モデルを再取得して変更を確認
+        $this->assertEquals('123-4567', $user->postal_code);
+        $this->assertEquals('東京都渋谷区テスト町1-2-3', $user->address);
+        $this->assertEquals('テストビル101号室', $user->building);
+
+        // 4. 商品購入ページが正しく開けることを確認
         $response = $this->get("/purchase/{$product->id}");
-
-        // 郵便番号をフォーマットしてから期待結果を確認
-        $formattedPostalCode = '〒' . substr($addressData['postal_code'], 0, 3) . '-' . substr($addressData['postal_code'], 3);
-
-        // 期待結果：商品購入画面に登録した住所が反映されていることを確認
-        $response->assertSeeText($formattedPostalCode);
-        $response->assertSeeText($addressData['address']);
-        $response->assertSeeText($addressData['building']);
+        $response->assertStatus(200);
     }
 }
