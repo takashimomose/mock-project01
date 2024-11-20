@@ -16,21 +16,14 @@ body {
 
 /* ヘッダーのスタイル */
 .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000;
-    height: 60px;
-    padding: 0 20px;
-}
-
-.header-wrapper {
     max-width: 1540px; /* 最大幅を設定（必要に応じて調整） */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     background-color: #000;
+    height: 60px;
+    padding: 0 20px;
 }
 
 .header-logo img {
