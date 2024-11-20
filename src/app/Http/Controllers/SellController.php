@@ -23,7 +23,7 @@ class SellController extends Controller
         $categories = Category::all();
         $conditions = Condition::all(); // 条件を取得
 
-        return view('sell', ['user' => $user, 'categories' => $categories, 'conditions' => $conditions]);
+        return view('sell', compact('user', 'categories', 'conditions'));
     }
 
     public function store(Request $request)
