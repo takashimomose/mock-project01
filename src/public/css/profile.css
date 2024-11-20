@@ -269,11 +269,16 @@ input[name="tab-item"] {
     }
 
     .current-profile-image {
-        margin-right: 40px;
+        margin-right: 20px;
     }
 
     .profile-image-group h1 {
-        margin-right: 40px;
+        margin-right: 20px;
         /* h1 と button の間のスペース */
+        font-size: 32px;
+    }
+
+    .edit-profile-btn {
+        font-size: 22px;
     }
 }

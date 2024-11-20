@@ -97,3 +97,9 @@ body {
 .header-sell-button:hover {
     background-color: #ddd;
 }
+
+.footer {
+    background-color: #fff; /* 背景色を画面全体に適用 */
+    width: 100%; /* 横幅いっぱいにする */
+    height: 60px;
+}
