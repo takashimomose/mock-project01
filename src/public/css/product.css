@@ -29,15 +29,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 650px;
-    height: 650px;
+    width: 100%; /* 親要素に合わせて幅を調整 */
+    max-width: 650px; /* 最大幅を設定（必要に応じて調整） */
+    aspect-ratio: 1; /*  正方形にするためのアスペクト比  */
+    box-sizing: border-box;
+    margin: 0 auto; /* 中央揃え */
 }
 
 .image-container img {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* 縦長・横長の画像に対応 */
+    max-width: 100%; /* 画像が親要素の幅にフィットするように */
+    max-height: 100%; /* 高さも親要素にフィットさせる */
+    object-fit: contain; /* 画像を枠内に収め、縦横比を保つ */
 }
 
 .product-details h1 {
@@ -239,3 +242,4 @@ h3 {
     font-weight: 700;
     cursor: pointer;
 }
+
