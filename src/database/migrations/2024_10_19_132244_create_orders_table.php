@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id(); // 主キー
+            $table->id();
             $table->unsignedBigInteger('user_id'); // 注文者ID（usersテーブルへの外部キー）
             $table->unsignedBigInteger('product_id'); // 商品ID（productsテーブルへの外部キー）
             $table->unsignedBigInteger('method_id'); // 支払い方法ID（payment_methodsテーブルへの外部キー）
