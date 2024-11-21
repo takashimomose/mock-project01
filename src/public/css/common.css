@@ -1,5 +1,6 @@
 html {
     font-family: "Noto Sans JP", sans-serif;
+    overflow-y: scroll;
 }
 
 body {
