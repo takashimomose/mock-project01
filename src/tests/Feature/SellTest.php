@@ -29,9 +29,9 @@ class SellTest extends TestCase
         $this->actingAs($user);
 
         // 必要なデータを準備
-        $condition = Condition::create(['condition_name' => '新品']);
-        $category1 = Category::create(['category_name' => 'カテゴリー1']);
-        $category2 = Category::create(['category_name' => 'カテゴリー2']);
+        $condition = Condition::create(['condition_name' => '良好']);
+        $category1 = Category::create(['category_name' => 'ファッション']);
+        $category2 = Category::create(['category_name' => 'コスメ']);
         $categories = [$category1->id, $category2->id];
 
         // テスト用の画像ファイル
