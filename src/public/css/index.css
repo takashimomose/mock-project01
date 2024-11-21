@@ -1,14 +1,8 @@
 .wrapper {
     max-width: 1540px;
-    /* 最大横幅を1540pxに制限 */
     margin: 0 auto;
-    /* 中央揃え */
     display: flex;
-    /* Flexboxを適用 */
     justify-content: center;
-    /* 子要素を左右中央に揃える */
-    /* height: 100vh; */
-    /* 画面全体の高さを確保して、中央に配置 */
     display: flex;
     flex-direction: column;
 }
@@ -26,11 +20,8 @@
     padding: 40px 0 0 40px;
 }
 
-/*タブのスタイル*/
 .tab-item {
-    /* width: calc(100%/4); */
     height: 50px;
-    /* border-bottom: 3px solid #000000; */
     background-color: #FFF;
     color: #5F5F5F;
     line-height: 50px;
@@ -38,7 +29,6 @@
     text-align: center;
     display: block;
     float: left;
-    /* text-align: center; */
     font-weight: bold;
     transition: all 0.2s ease;
     margin-left: 40px;
@@ -48,22 +38,17 @@
     opacity: 0.75;
 }
 
-/*ラジオボタンを全て消す*/
 input[name="tab-item"] {
     display: none;
 }
 
-/*選択されているタブのスタイルを変える*/
 .tabs input:checked+.tab-item {
     color: #FF0000;
 }
 
-/*タブ切り替えの中身のスタイル*/
 .tab-content {
     max-width: 1540px;
-    /* 最大幅を制限 */
     margin: 0 auto;
-    /* 中央揃え */
     display: none;
     padding: 40px 40px 0;
     clear: both;
@@ -75,18 +60,14 @@ input[name="tab-item"] {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     list-style-type: none;
-    /* 点を非表示にする */
     max-width: 1270px;
-    /* 最大幅を指定（必要に応じて調整） */
     margin: 0 auto;
-    /* 中央揃え */
     padding-left: 0;
     padding-top: 40px;
 }
 
 .product-list li {
     position: relative;
-    /* li要素に相対位置を指定 */
 }
 
 .image-container {
@@ -102,7 +83,7 @@ input[name="tab-item"] {
     display: block;
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* 縦長・横長の画像に対応 */
+    object-fit: contain;
 }
 
 .product-list p {
@@ -117,93 +98,62 @@ input[name="tab-item"] {
 
 .product-list a:hover {
     text-decoration: none;
-    /* ホバー時に下線を表示したい場合はこの行を追加 */
 }
 
 .pagination {
     display: flex;
     justify-content: flex-end;
-    /* ページネーションは右端に揃う */
     list-style-type: none;
-    /* 箇条書きの・を非表示にする */
 }
 
-/* Bootstrapを使用。ページネーションの基本スタイル */
 .page-item .page-link {
     color: #000;
-    /* 文字色 */
     background-color: #fff;
-    /* 背景色 */
     border: 1px solid #000;
-    /* ボーダー色 */
     padding: 10px 20px;
-    /* 内側の余白 */
     border-radius: none;
-    /* 角丸をなくす */
     font-size: 18px;
-    /* フォントサイズ */
     text-decoration: none;
-    /* 下線を消す */
 }
 
-/* ホバー時のスタイル */
 .page-item .page-link:hover {
     background-color: #000;
-    /* ホバー時の背景色 */
     color: #FFF;
-    /* ホバー時の文字色 */
 }
 
-/* アクティブページのスタイル */
 .page-item.active .page-link {
     background-color: #000;
-    /* アクティブページの背景色 */
     color: #fff;
-    /* アクティブページの文字色 */
     border-color: #000;
-    /* アクティブページのボーダー色 */
 }
 
-/* 無効化されたページのスタイル */
 .page-item.disabled .page-link {
     color: #000;
-    /* 無効化されたページの文字色 */
     background-color: #FFF;
-    /* 無効化されたページの背景色 */
     border-color: #000;
-    /* 無効化されたページのボーダー色 */
 }
 
 
 @media (max-width: 1400px) {
     .product-list {
         grid-template-columns: repeat(3, 1fr);
-        /* 画面が狭いときは2カラムにする */
         max-width: 1090px;
-        /*  最大幅を指定（必要に応じて調整） */
     }
 
     .image-container {
         max-width: 350px;
         max-height: 350px;
         background-color: black;
-        /* 背景色を黒に設定 */
         display: flex;
-        /* flexboxを利用して画像を中央に配置 */
         justify-content: center;
-        /* 横方向の中央揃え */
         align-items: center;
-        /* 縦方向の中央揃え */
         overflow: hidden;
-        /* はみ出た部分を隠す */
     }
 }
 
 @media (max-width: 1110px) {
     .product-list {
         grid-template-columns: repeat(2, 1fr);
-        /* 画面が狭いときは2カラムにする */
         max-width: 720px;
-        /*  最大幅を指定（必要に応じて調整） */
     }
 }

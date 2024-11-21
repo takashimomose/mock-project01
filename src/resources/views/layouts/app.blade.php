@@ -68,6 +68,7 @@
         </div>
     </header>
     @yield('content') <!-- ここに各ページのコンテンツが挿入されます -->
+    <footer class="footer"></footer>
 </body>
 
 </html>

@@ -7,31 +7,22 @@
 
 .wrapper {
     max-width: 1540px;
-    /* 最大横幅を1540pxに制限 */
     margin: 0 auto;
-    /* 中央揃え */
     padding: 0 25px;
-    /* 余白を調整 */
     display: flex;
-    /* Flexboxを適用 */
     justify-content: center;
-    /* 子要素を左右中央に揃える */
     height: 100vh;
-    /* 画面全体の高さを確保して、中央に配置 */
 }
 
 .profile-edit {
     width: 100%;
     max-width: 500px;
-    /* セクションの最大横幅を制限 */
     padding: 20px;
-    /* 内側の余白 */
     border-radius: 8px;
-    /* 角丸 */
     text-align: left;
 }
 
-h1 {
+.profile-edit h1 {
     text-align: center;
 }
 
@@ -40,14 +31,13 @@ h1 {
     align-items: center;
     gap: 30px;
     margin-bottom: 40px;
-    /* Add some space between the image and the button */
 }
 
 .current-profile-image {
     width: 150px;
     height: 150px;
-    border-radius: 50%; /* 画像を丸く切り取る */
-    object-fit: cover; /* 画像を枠内に収めて表示 */
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .profile-image-upload {
@@ -69,10 +59,10 @@ h1 {
 }
 
 .placeholder-profile-image {
-    width: 150px;           /* 円の幅 */
-    height: 150px;          /* 円の高さ */
-    background-color: #ccc; /* グレーの背景色 */
-    border-radius: 50%;     /* 円形にする */
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 50%;
     margin-right: 20px;
 }
 
@@ -82,30 +72,23 @@ h1 {
 
 .form-group {
     display: flex;
-    /* Flexboxを適用 */
     flex-direction: column;
-    /* 子要素を縦に並べる */
 }
 
 .form-label {
     margin-bottom: 5px;
-    /* ラベルと入力フィールドの間に少し余白を追加 */
     font-weight: 700;
 }
 
 .form-input {
     width: 100%;
-    /* 入力フィールドを親要素の幅に合わせる */
     padding: 10px;
-    /* 入力フィールド内側の余白 */
     margin-bottom: 30px;
 }
 
 .primary-btn {
     width: 100%;
-    /* 親要素の幅に合わせる */
     padding: 10px;
-    /* 内側の余白 */
     margin: 30px 0 20px 0;
     color: #FFF;
     background-color: #FF5555;

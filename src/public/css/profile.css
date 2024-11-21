@@ -7,54 +7,38 @@
 
 .wrapper {
     max-width: 1540px;
-    /* 最大横幅を1540pxに制限 */
     margin: 0 auto;
-    /* 中央揃え */
     display: flex;
-    /* Flexboxを適用 */
     justify-content: center;
-    /* 子要素を左右中央に揃える */
-    /* height: 100vh; */
-    /* 画面全体の高さを確保して、中央に配置 */
     display: flex;
     flex-direction: column;
 }
 
 .profile {
     width: 100%;
-    /* max-width: 1000px; */
-    /* セクションの最大横幅を制限 */
     padding: 20px;
-    /* 内側の余白 */
     text-align: center;
     display: flex;
     justify-content: center;
-    /* .profile-image-group を左右中央に揃える */
 }
 
 .profile-image-group {
     display: flex;
     align-items: center;
     margin: 40px 0;
-    /* Add some space between the image and the button */
 }
 
 .current-profile-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    /* 画像を丸く切り取る */
     object-fit: cover;
-    /* 画像を枠内に収めて表示 */
     margin-right: 60px;
-    /* img と h1 の間のスペース */
 }
 
 .profile-image-group h1 {
     margin-right: 150px;
-    /* h1 と button の間のスペース */
     white-space: nowrap;
-    /* テキストが折り返さないようにする */
     font-size: 36px;
 }
 
@@ -70,7 +54,6 @@
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
     white-space: nowrap;
-    /* テキストが折り返さないようにする */
     height: 60px;
 }
 
@@ -89,23 +72,8 @@
     border-bottom: 2px solid #000000;
 }
 
-
-
-/*タブ切り替え全体のスタイル*/
-/* .tabs {
-    margin-top: 50px;
-    padding-bottom: 40px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 700px;
-    margin: 0 auto;
-} */
-
-/*タブのスタイル*/
 .tab-item {
-    /* width: calc(100%/4); */
     height: 50px;
-    /* border-bottom: 3px solid #000000; */
     background-color: #FFF;
     color: #5F5F5F;
     line-height: 50px;
@@ -113,7 +81,6 @@
     text-align: center;
     display: block;
     float: left;
-    /* text-align: center; */
     font-weight: bold;
     transition: all 0.2s ease;
     margin-left: 40px;
@@ -123,71 +90,59 @@
     opacity: 0.75;
 }
 
-/*ラジオボタンを全て消す*/
 input[name="tab-item"] {
     display: none;
 }
 
-
-
-/*選択されているタブのコンテンツのみを表示*/
 #all:checked~#all-content,
 #likes:checked~#likes-content {
     display: block;
 }
 
-/*選択されているタブのスタイルを変える*/
 .tabs input:checked+.tab-item {
     color: #FF0000;
 }
 
-/*タブ切り替えの中身のスタイル*/
 .tab-content {
     max-width: 1540px;
-    /* 最大幅を制限 */
     margin: 0 auto;
-    /* 中央揃え */
     display: none;
     padding: 40px 40px 0;
     clear: both;
     overflow: hidden;
 }
 
-
 .product-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     list-style-type: none;
-    /* 点を非表示にする */
     max-width: 1270px;
-    /* 最大幅を指定（必要に応じて調整） */
     margin: 0 auto;
-    /* 中央揃え */
     padding-left: 0;
     padding-top: 40px;
 }
 
 .product-list li {
-    position: relative; /* li要素に相対位置を指定 */
+    position: relative;
 }
 
 .image-container {
-    width: 300px; /* 表示領域の幅 */
-    height: 300px; /* 表示領域の高さ */
-    background-color: black; /* 背景色を黒に設定 */
-    display: flex; /* flexboxを利用して画像を中央に配置 */
-    justify-content: center; /* 横方向の中央揃え */
-    align-items: center; /* 縦方向の中央揃え */
-    overflow: hidden; /* はみ出た部分を隠す */
+    width: 300px;
+    height: 300px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .product-list img {
-    max-width: 100%; /* 幅を100%に設定 */
-    max-height: 100%; /* 高さを100%に設定 */
-    object-fit: contain; /* 画像を領域に収める */
-    display: block; /* ブロック要素にして余白を消す */
-    margin: auto; /* 自動マージンでセンタリング */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
 }
 
 .product-list p {
@@ -201,71 +156,64 @@ input[name="tab-item"] {
 }
 
 .product-list a:hover {
-    text-decoration: none; /* ホバー時に下線を表示したい場合はこの行を追加 */
+    text-decoration: none;
 }
 
 .pagination {
     display: flex;
-    justify-content: flex-end; /* ページネーションは右端に揃う */
-    list-style-type: none; /* 箇条書きの・を非表示にする */
+    justify-content: flex-end;
+    list-style-type: none;
 }
 
-/* Bootstrapを使用。ページネーションの基本スタイル */
+/* Bootstrapを使用 */
 .page-item .page-link {
-    color: #000; /* 文字色 */
-    background-color: #fff; /* 背景色 */
-    border: 1px solid #000; /* ボーダー色 */
-    padding: 10px 20px; /* 内側の余白 */
-    border-radius: none; /* 角丸をなくす */
-    font-size: 18px; /* フォントサイズ */
-    text-decoration: none; /* 下線を消す */
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 10px 20px;
+    border-radius: none;
+    font-size: 18px;
+    text-decoration: none;
 }
 
-/* ホバー時のスタイル */
 .page-item .page-link:hover {
-    background-color: #000; /* ホバー時の背景色 */
-    color: #FFF; /* ホバー時の文字色 */
+    background-color: #000;
+    color: #FFF;
 }
 
-/* アクティブページのスタイル */
 .page-item.active .page-link {
-    background-color: #000; /* アクティブページの背景色 */
-    color: #fff; /* アクティブページの文字色 */
-    border-color: #000; /* アクティブページのボーダー色 */
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
 }
 
-/* 無効化されたページのスタイル */
 .page-item.disabled .page-link {
-    color: #000; /* 無効化されたページの文字色 */
-    background-color: #FFF; /* 無効化されたページの背景色 */
-    border-color: #000; /* 無効化されたページのボーダー色 */
+    color: #000;
+    background-color: #FFF;
+    border-color: #000;
 }
 
 @media (max-width: 1400px) {
     .product-list {
         grid-template-columns: repeat(3, 1fr);
-        /* 画面が狭いときは2カラムにする */
         max-width: 1090px;
-        /*  最大幅を指定（必要に応じて調整） */
     }
 
     .image-container {
         max-width: 350px;
         max-height: 350px;
-        background-color: black; /* 背景色を黒に設定 */
-        display: flex; /* flexboxを利用して画像を中央に配置 */
-        justify-content: center; /* 横方向の中央揃え */
-        align-items: center; /* 縦方向の中央揃え */
-        overflow: hidden; /* はみ出た部分を隠す */
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
     }
 }
 
 @media (max-width: 1110px) {
     .product-list {
         grid-template-columns: repeat(2, 1fr);
-        /* 画面が狭いときは2カラムにする */
         max-width: 720px;
-        /*  最大幅を指定（必要に応じて調整） */
     }
 
     .current-profile-image {
@@ -274,7 +222,6 @@ input[name="tab-item"] {
 
     .profile-image-group h1 {
         margin-right: 20px;
-        /* h1 と button の間のスペース */
         font-size: 32px;
     }
 

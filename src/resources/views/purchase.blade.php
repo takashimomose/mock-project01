@@ -29,7 +29,7 @@
                         <option value="" selected hidden>選択してください</option>
                         @foreach ($paymentMethods as $paymentMethod)
                             <option value="{{ $paymentMethod->id }}"
-                                {{ request('payment_method_id') == $paymentMethod->id ? 'selected' : '' }}>
+                                {{ (request('payment_method_id') ?? $payment_method_id) == $paymentMethod->id ? 'selected' : '' }}>
                                 {{ $paymentMethod->method_name }}
                             </option>
                         @endforeach

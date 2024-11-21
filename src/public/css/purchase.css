@@ -7,21 +7,16 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
-    /* 左右のセクションの間にスペースを追加 */
     max-width: 1540px;
-    /* 最大横幅を1540pxに制限 */
     padding: 70px 70px;
-    /* 余白を調整 */
 }
 
 .left-section {
     width: 62%;
-    /* 左右にバランスよく幅を取る */
 }
 
 .right-section {
     width: 30%;
-    /* 左右にバランスよく幅を取る */
 }
 
 .product {
@@ -95,17 +90,14 @@
 .delivery-address-header {
     display: flex;
     align-items: center;
-    /* h2とaを上下中央に揃える */
 }
 
 .delivery-address-header h2 {
     margin-right: 10px;
-    /* h2とaの間にスペースを追加 */
 }
 
 .delivery-address-header a {
     margin-left: auto;
-    /* aタグを右端に配置 */
     text-decoration: none;
     color: #0073CC;
     font-size: 20px;
@@ -120,16 +112,14 @@
 
 .summary-item {
     display: flex;
-    justify-content: center; /* 中央に配置 */
+    justify-content: center;
     align-items: center;
-    /* h2とaを上下中央に揃える */
     border-top: 1px solid;
     border: bottom 1px solid;
 }
 
 .summary-item h2 {
     margin-right: 10px;
-    /* h2とaの間にスペースを追加 */
     font-size: 20px;
     font-weight: normal;
 }
@@ -140,9 +130,7 @@
 
 .purchase-btn {
     width: 100%;
-    /* 親要素の幅に合わせる */
     padding: 10px;
-    /* 内側の余白 */
     margin: 30px 0 20px 0;
     color: #FFF;
     background-color: #FF5555;
@@ -154,7 +142,7 @@
 }
 
 .error-list {
-    list-style-type: none; /* マーカーを非表示にする */
-    padding: 0; /* 左の余白もなくす */
-    margin: 0; /* 上下の余白も調整可能 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }

@@ -31,7 +31,7 @@
             <label class="tab-item" for="likes" onclick="changeTab('mylist')">購入した商品</label>
         </section>
         <!-- 出品した商品タブ -->
-        <section class="item">
+        {{-- <section class="item"> --}}
             <div class="tab-content" id="all-content" style="{{ $tab === 'sell' ? 'display:block;' : 'display:none;' }}">
                 <ul class="product-list">
                     @foreach ($products as $product)
@@ -54,10 +54,10 @@
                     {{ $products->links() }}
                 </div>
             </div>
-        </section>
+        {{-- </section> --}}
 
         <!-- 購入した商品タブ -->
-        <section class="item">
+        {{-- <section class="item"> --}}
             <div class="tab-content" id="likes-content" style="{{ $tab === 'buy' ? 'display:block;' : 'display:none;' }}">
                 @if (Auth::check())
                     <ul class="product-list">
@@ -82,7 +82,7 @@
                     </div>
                 @endif
             </div>
-        </section>
+        {{-- </section> --}}
     </main>
 
     <!-- タブ変更のためのJavaScript -->

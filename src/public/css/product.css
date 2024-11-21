@@ -1,23 +1,13 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .wrapper {
     display: flex;
     justify-content: space-between;
-    /* 左右のセクションの間にスペースを追加 */
     max-width: 1540px;
-    /* 最大横幅を1540pxに制限 */
     padding: 70px 70px;
-    /* 余白を調整 */
 }
 
 .left-section,
 .right-section {
     width: 47%;
-    /* 左右にバランスよく幅を取る */
 }
 
 .image-container {
@@ -25,18 +15,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* 親要素に合わせて幅を調整 */
-    max-width: 650px; /* 最大幅を設定（必要に応じて調整） */
-    aspect-ratio: 1; /*  正方形にするためのアスペクト比  */
+    width: 100%;
+    max-width: 650px;
+    aspect-ratio: 1;
     box-sizing: border-box;
-    margin: 0 auto; /* 中央揃え */
+    margin: 0 auto;
 }
 
 .image-container img {
     display: block;
-    max-width: 100%; /* 画像が親要素の幅にフィットするように */
-    max-height: 100%; /* 高さも親要素にフィットさせる */
-    object-fit: contain; /* 画像を枠内に収め、縦横比を保つ */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .product-details h1 {
@@ -57,21 +47,14 @@
 .like-comment-group {
     display: flex;
     gap: 50px;
-    /* like-countとcomment-countの間隔 */
     align-items: center;
-    /* アイコンとテキストを中央揃えに */
     margin-left: 30px;
-}
-
-h2 {
-    font-size: 36px;
 }
 
 .like-count {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    /* アイコンと数値の間隔 */
 }
 
 .like-button {
@@ -90,40 +73,30 @@ h2 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* 縦並び */
     align-items: center;
-    /* 中央揃え */
 }
 
 .comment-count p {
     margin: 0;
 }
 
-
-/* ボタン風に見せるためのスタイル */
 .category-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    /* カテゴリ同士の間隔 */
 }
 
 .category-items {
     display: flex;
-    /* 必要に応じて、縦または横に並べる */
     flex-wrap: wrap;
-    /* 折り返しを可能にする */
     margin: 5px 0 20px 0;
-    /* ラベルとの間にスペースを追加 */
     gap: 10px;
     margin: 0 0 20px 40px;
 }
 
 .category-item {
     padding: 5px 10px;
-    /* 内部スペースの設定 */
     margin-right: 5px;
-    /* カテゴリー項目間のスペース */
 }
 
 .category-item {
@@ -139,9 +112,7 @@ h2 {
 
 .proceed-purchase-btn {
     width: 100%;
-    /* 親要素の幅に合わせる */
     padding: 10px;
-    /* 内側の余白 */
     margin: 30px 0 20px 0;
     color: #FFF;
     background-color: #FF5555;
@@ -157,6 +128,14 @@ h2 {
     font-size: 24px;
 }
 
+.product-description h2 {
+    font-size: 36px;
+}
+
+.product-info h2 {
+    font-size: 36px;
+}
+
 .description {
     font-size: 24px;
 }
@@ -165,7 +144,6 @@ h2 {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* ラベルと状態の間隔 */
 }
 
 .condition {
@@ -175,31 +153,28 @@ h2 {
 
 .comment-label {
     color: #5F5F5F;
+    font-size: 36px;
 }
 
 .comment {
     display: flex;
     align-items: center;
     margin: 10px 0;
-    /* Add some space between the image and the button */
 }
 
 .current-profile-image {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    /* 画像を丸く切り取る */
     object-fit: cover;
-    /* 画像を枠内に収めて表示 */
     margin-right: 10px;
-    /* img と p の間のスペース */
 }
 
 .placeholder-profile-image {
-    width: 70px;           /* 円の幅 */
-    height: 70px;          /* 円の高さ */
-    background-color: #ccc; /* グレーの背景色 */
-    border-radius: 50%;     /* 円形にする */
+    width: 70px;
+    height: 70px;
+    background-color: #ccc;
+    border-radius: 50%;
     margin-right: 20px;
 }
 
@@ -214,7 +189,7 @@ h2 {
     font-size: 20px;
 }
 
-h3 {
+.comment-form h3 {
     font-size: 28px;
 }
 
@@ -226,9 +201,7 @@ h3 {
 
 .submit-comment-btn {
     width: 100%;
-    /* 親要素の幅に合わせる */
     padding: 10px;
-    /* 内側の余白 */
     margin: 30px 0 20px 0;
     color: #FFF;
     background-color: #FF5555;
@@ -238,4 +211,3 @@ h3 {
     font-weight: 700;
     cursor: pointer;
 }
-
