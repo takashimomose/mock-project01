@@ -70,12 +70,9 @@ class PaymentController extends Controller
                 'success_url' => route('purchase.success', ['product_id' => $product->id]),
                 'cancel_url' => route('purchase.cancel'),
             ]);
-        } else {
-            // 不正なpayment_method_idの場合の処理（エラーを表示するなど）
-            return redirect()->back()->withErrors(['message' => '無効な支払い方法です。']);
         }
-
         // Stripeの決済画面にリダイレクト
+
         return redirect($checkout_session->url);
     }
 }

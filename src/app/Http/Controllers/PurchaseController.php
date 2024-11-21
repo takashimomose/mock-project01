@@ -27,8 +27,11 @@ class PurchaseController extends Controller
         // 支払い方法（payment_methodsテーブルの全レコード）を取得
         $paymentMethods = PaymentMethod::all();
 
+        // セッションから支払い方法IDを取得
+        $payment_method_id = Session::get('payment_method_id');
+
         // ビューにデータを渡す
-        return view('purchase', compact('product', 'user', 'paymentMethods'));
+        return view('purchase', compact('product', 'user', 'paymentMethods', 'payment_method_id'));
     }
 
     // 送付先住所変更ページの表示
