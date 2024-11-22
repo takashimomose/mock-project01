@@ -9,10 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
-    // テーブル名を指定
     protected $table = 'products';
 
-    // 保存可能なカラムを指定
     protected $fillable = [
         'user_id',
         'product_name',
@@ -24,21 +22,64 @@ class Product extends Model
         'product_image',
     ];
 
-    // likesテーブルとのリレーションを定義
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
 
-    // Categoryとの多対多リレーションを定義
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
     }
 
-    // Conditiionとのリレーションを定義
     public function condition()
     {
         return $this->belongsTo(Condition::class, 'condition_id');
+    }
+
+    /**
+     * 条件に基づく商品一覧を取得
+     *
+     * @param string|null $keyword
+     * @param int|null $excludeUserId
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function getFilteredProducts($keyword = null, $excludeUserId = null)
+    {
+        $query = self::select('id', 'is_sold', 'product_name', 'product_image');
+
+        // ログインユーザーの商品を除外
+        if ($excludeUserId) {
+            $query->where('user_id', '!=', $excludeUserId);
+        }
+
+        // キーワード検索
+        if ($keyword) {
+            $query->where('product_name', 'LIKE', "%{$keyword}%");
+        }
+
+        return $query;
+    }
+
+    /**
+     * ログインユーザーがいいねした商品を取得
+     *
+     * @param int $userId
+     * @param string|null $keyword
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function getLikedProducts($userId, $keyword = null)
+    {
+        $query = self::whereHas('likes', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })
+            ->select('id', 'is_sold', 'product_name', 'product_image');
+
+        // キーワード検索
+        if ($keyword) {
+            $query->where('product_name', 'LIKE', "%{$keyword}%");
+        }
+
+        return $query;
     }
 }

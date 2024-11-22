@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Like;
 use App\Models\Comment;
-use App\Models\User;
 
 class ProductController extends Controller
 {
