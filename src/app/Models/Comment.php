@@ -30,4 +30,10 @@ class Comment extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    // コメントを保存するメソッド
+    public static function storeComment($commentData)
+    {
+        return self::create($commentData);
+    }
 }

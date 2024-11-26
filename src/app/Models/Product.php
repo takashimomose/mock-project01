@@ -131,4 +131,34 @@ class Product extends Model
             $this->categories()->attach($categoryIds);
         }
     }
+
+    // 商品に関連するカテゴリと状態を取得する
+    public static function getProductWithDetails($productId)
+    {
+        return self::with('categories', 'condition')->findOrFail($productId);
+    }
+
+    // コメントの件数を取得する
+    public function getCommentCount()
+    {
+        return $this->comments()->count();
+    }
+
+    // 商品に関連するコメント
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // いいねの件数を取得する
+    public function getLikeCount()
+    {
+        return $this->likes()->count();
+    }
+
+    // ユーザーがその商品に「いいね」をしているか確認
+    public function isLikedByUser($userId)
+    {
+        return $this->likes()->where('user_id', $userId)->exists();
+    }
 }

@@ -29,4 +29,24 @@ class Like extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    // いいねのトグル処理
+    public static function toggleLike($productId, $userId)
+    {
+        // いいねが存在するか確認
+        $like = self::where('product_id', $productId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($like) {
+            // いいねが存在する場合は削除
+            $like->delete();
+        } else {
+            // いいねが存在しない場合は追加
+            self::create([
+                'user_id' => $userId,
+                'product_id' => $productId,
+            ]);
+        }
+    }
 }

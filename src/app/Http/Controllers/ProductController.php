@@ -14,22 +14,20 @@ class ProductController extends Controller
     // 商品の詳細ページ
     public function show($product_id)
     {
-        // productと関連するcategoriesとconditionを取得する（Eager Loading）
-        $product = Product::with('categories', 'condition')->findOrFail($product_id);
+        // 商品、カテゴリ、状態を取得
+        $product = Product::getProductWithDetails($product_id);
 
-        // コメントを取得し、ユーザー情報も一緒に取得する（Eager Loading）
-        $comments = Comment::with('user') // コメントしたユーザーの情報を取得
-            ->where('product_id', $product_id)
-            ->get();
+        // コメントを取得
+        $comments = $product->comments()->with('user')->get();
 
         // コメント数を取得
-        $commentCount = $comments->count();
+        $commentCount = $product->getCommentCount();
 
         // いいね数を取得
-        $likeCount = Like::where('product_id', $product_id)->count();
+        $likeCount = $product->getLikeCount();
 
         // ユーザーがその商品に「いいね」をしているか確認
-        $isLiked = Like::where('product_id', $product_id)->where('user_id', Auth::id())->exists();
+        $isLiked = $product->isLikedByUser(Auth::id());
 
         // 取得したデータをビューに渡す
         return view('product', compact('product', 'comments', 'commentCount', 'likeCount', 'isLiked'));
@@ -47,8 +45,8 @@ class ProductController extends Controller
             'product_id' => $product_id, // 商品のID
         ];
 
-        // データベースにコメントを保存
-        Comment::create($comment);
+        // Commentモデルを使ってコメントを保存
+        Comment::storeComment($comment);
 
         // 商品詳細ページにリダイレクト
         return redirect()->route('product', ['product_id' => $product_id]);
@@ -58,19 +56,8 @@ class ProductController extends Controller
     {
         $userId = Auth::id(); // 現在のユーザーIDを取得
 
-        // いいねが存在するか確認
-        $like = Like::where('product_id', $product_id)->where('user_id', $userId)->first();
-
-        if ($like) {
-            // いいねが存在する場合は削除
-            $like->delete();
-        } else {
-            // いいねが存在しない場合は追加
-            Like::create([
-                'user_id' => $userId,
-                'product_id' => $product_id,
-            ]);
-        }
+        // LikeモデルのtoggleLikeメソッドを呼び出し
+        Like::toggleLike($product_id, $userId);
 
         // 商品詳細ページにリダイレクト
         return redirect()->route('product', ['product_id' => $product_id]);
