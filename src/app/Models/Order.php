@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Order extends Model
 {
@@ -47,5 +48,19 @@ class Order extends Model
     public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class, 'method_id');
+    }
+
+    // 注文を作成するメソッド
+    public static function createOrder($orderData, $deliveryAddress, $productId)
+    {
+        return self::create([
+            'user_id' => $orderData['user_id'],
+            'product_id' => $productId,
+            'method_id' => $orderData['method_id'],
+            'delivery_postal_code' => $deliveryAddress['postal_code'],
+            'delivery_address' => $deliveryAddress['address'],
+            'delivery_building' => $deliveryAddress['building'],
+            'order_date' => Carbon::now(),
+        ]);
     }
 }

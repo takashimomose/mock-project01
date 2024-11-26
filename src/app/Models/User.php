@@ -83,4 +83,11 @@ class User extends Authenticatable implements MustVerifyEmail // ← MustVerifyE
     {
         return $this->update($data);
     }
+
+    // 配送先情報を取得するメソッド
+    public function getShippingInfo()
+    {
+        return $this->select('id', 'name', 'postal_code', 'address', 'building')
+            ->first();
+    }
 }

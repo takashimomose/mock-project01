@@ -161,4 +161,18 @@ class Product extends Model
     {
         return $this->likes()->where('user_id', $userId)->exists();
     }
+
+    // 商品の詳細を取得するメソッド
+    public static function getProductDetails($productId)
+    {
+        return self::select('id', 'product_image', 'product_name', 'price')
+            ->where('id', $productId)
+            ->firstOrFail();
+    }
+
+    // 商品が販売されたことを更新するメソッド
+    public function markAsSold()
+    {
+        $this->update(['is_sold' => true]);
+    }
 }

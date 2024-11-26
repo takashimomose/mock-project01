@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Session;
-use Carbon\Carbon;
 
 class PurchaseController extends Controller
 {
@@ -17,12 +16,10 @@ class PurchaseController extends Controller
     public function show($product_id)
     {
         // 商品の詳細を取得
-        $product = Product::select('id', 'product_image', 'product_name', 'price')
-            ->where('id', $product_id)
-            ->firstOrFail();
+        $product = Product::getProductDetails($product_id);
 
         // 現在ログインしているユーザーの配送先情報を取得
-        $user = Auth::user();
+        $user = Auth::user()->getShippingInfo();
 
         // 支払い方法（payment_methodsテーブルの全レコード）を取得
         $paymentMethods = PaymentMethod::all();
@@ -108,22 +105,15 @@ class PurchaseController extends Controller
         $product = Product::findOrFail($product_id);
 
         // 新しい注文を作成
-        Order::create([
-            'user_id' => $orderData['user_id'],
-            'product_id' => $product->id,
-            'method_id' => $orderData['method_id'],
-            'delivery_postal_code' => $deliveryAddress['postal_code'],
-            'delivery_address' => $deliveryAddress['address'],
-            'delivery_building' => $deliveryAddress['building'],
-            'order_date' => Carbon::now(),
-        ]);
+        Order::createOrder($orderData, $deliveryAddress, $product->id);
 
         // 商品のis_soldをtrueに更新
-        $product->update(['is_sold' => true]);
+        $product->markAsSold();
 
         // 購入後のリダイレクト
         return redirect()->route('index')->with('message', '購入が完了しました。');
     }
+
 
     // 決済キャンセル時の処理
     public function cancel()
