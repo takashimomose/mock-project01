@@ -17,24 +17,11 @@ class ProfileController extends Controller
         // タブの状態を取得
         $tab = $request->get('tab', 'sell'); // デフォルトは'sell'
 
-        // ログインしているユーザーの products テーブルの product_name と product_image を取得
-        $productsQuery = Product::where('is_sold', false)
-            ->where('user_id', Auth::id()) // ログイン中のユーザーIDで絞り込み
-            ->select('id', 'product_name', 'product_image');
+        // ログインしているユーザーの未販売商品を取得
+        $products = Product::getUnsoldProductsByUser(Auth::id());
 
-        $products = $productsQuery->paginate(8); // ページネーションで8件に制限
-
-
-        // ログインしているユーザーの購入した商品のproduct_nameとproduct_imageを取得
-        $purchasedProductsQuery = Product::where('is_sold', true) // 購入済み商品
-            ->whereIn('id', function ($query) {
-                $query->select('product_id')
-                    ->from('orders') // ordersテーブルに置き換え
-                    ->where('user_id', Auth::id()); // ログインユーザーの購入
-            })
-            ->select('id', 'product_name', 'product_image'); // 商品名と画像を選択         
-
-        $purchasedProducts = $purchasedProductsQuery->paginate(8); // ページネーションで8件に制限
+        // ログインしているユーザーが購入した商品を取得
+        $purchasedProducts = Product::getPurchasedProductsByUser(Auth::id());
 
         // ビューにデータを渡す
         return view('profile', compact('user', 'products', 'purchasedProducts', 'tab'));
@@ -56,46 +43,26 @@ class ProfileController extends Controller
         $user = Auth::user(); // 現在のユーザーを取得
         $userData = $request->only(['name', 'postal_code', 'address', 'building', 'profile_image']);
 
-        // 画像ファイルのアップロード
-        $path = null;
-        if ($request->hasFile('profile_image')) {
-            // 画像ファイルが選択されていれば保存
-            $file = $request->file('profile_image');
-            $path = $file->store('profile_images', 'public'); // publicディスクに保存
+        // プロフィール画像を保存または更新
+        $path = $user->saveProfileImage(
+            $request->file('profile_image'),
+            $user->profile_image ?? Session::get('profile_image_path')
+        );
 
-            // 画像のパスをセッションに保存
-            Session::put('profile_image_path', $path);
-        } elseif ($user->profile_image) {
-            // 新しい画像が選択されていない場合は、既存の画像パスを保持
-            $path = $user->profile_image;
-        } elseif (Session::has('profile_image_path')) {
-            // バリデーションエラー後に再送信した場合、セッションに保存された画像パスを使用
-            $path = Session::get('profile_image_path');
-        }
+        // セッションに保存された画像パスを削除
+        Session::forget('profile_image_path');
 
-        // 商品画像がアップロードされていない場合でも、セッションに保存されたパスを使用して、バリデーションを回避
+        // 必要なバリデーション
         $rules = [
             'name' => 'required',
-            'profile_image' => 'mimes:jpeg,png',
+            'profile_image' => 'nullable|mimes:jpeg,png',
             'postal_code' => 'nullable|regex:/^\d{3}-\d{4}$/',
         ];
-
-        // 画像がアップロードされている場合のみ、画像のバリデーションを追加
-        if ($request->hasFile('profile_image')) {
-            $rules['profile_image'] = 'required|mimes:jpeg,png';
-        }
-
-        // バリデーションの実行
         $request->validate($rules);
 
-        // データベースに画像のパスを保存
-        $userData['profile_image'] = $path; // 'profile_images/ファイル名'の形式で保存
-
-
-        $user->update($userData); // ユーザー情報を更新
-
-        // セッションから画像パスを削除
-        Session::forget('profile_image_path');
+        // プロフィール情報を更新
+        $userData['profile_image'] = $path;
+        $user->updateProfile($userData);
 
         return redirect('/');
     }

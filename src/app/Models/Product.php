@@ -82,4 +82,36 @@ class Product extends Model
 
         return $query;
     }
+
+    /**
+     * ログインユーザーの未販売商品を取得
+     *
+     * @param int $userId
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function getUnsoldProductsByUser($userId)
+    {
+        return self::where('is_sold', false)
+            ->where('user_id', $userId)
+            ->select('id', 'product_name', 'product_image')
+            ->paginate(8);
+    }
+
+    /**
+     * ログインユーザーが購入した商品を取得
+     *
+     * @param int $userId
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function getPurchasedProductsByUser($userId)
+    {
+        return self::where('is_sold', true)
+            ->whereIn('id', function ($query) use ($userId) {
+                $query->select('product_id')
+                    ->from('orders')
+                    ->where('user_id', $userId);
+            })
+            ->select('id', 'product_name', 'product_image')
+            ->paginate(8);
+    }
 }

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-// use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable implements MustVerifyEmail // ← MustVerifyEmailインターフェイスを実装
 {
@@ -25,9 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail // ← MustVerifyE
         'postal_code',
         'address',
         'building',
-        'profile_image', 
-        'email_verified_at', 
-        'last_login_at', 
+        'profile_image',
+        'email_verified_at',
+        'last_login_at',
     ];
 
     /**
@@ -48,4 +47,40 @@ class User extends Authenticatable implements MustVerifyEmail // ← MustVerifyE
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * プロフィール画像を保存または更新
+     *
+     * @param \Illuminate\Http\UploadedFile|null $file
+     * @param string|null $existingPath
+     * @return string|null
+     */
+    public function saveProfileImage($file, $existingPath = null)
+    {
+        if ($file) {
+            // 新しい画像を保存し、古い画像を削除（必要なら）
+            $path = $file->store('profile_images', 'public');
+
+            // 必要に応じて古い画像を削除
+            if ($existingPath && \Storage::disk('public')->exists($existingPath)) {
+                \Storage::disk('public')->delete($existingPath);
+            }
+
+            return $path;
+        }
+
+        // 新しい画像がない場合、既存のパスを保持
+        return $existingPath;
+    }
+
+    /**
+     * プロフィール情報を更新
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function updateProfile(array $data)
+    {
+        return $this->update($data);
+    }
 }
