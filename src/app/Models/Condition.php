@@ -22,4 +22,9 @@ class Condition extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public static function getAllConditions()
+    {
+        return self::all();
+    }
 }

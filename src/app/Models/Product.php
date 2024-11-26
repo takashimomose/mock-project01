@@ -114,4 +114,21 @@ class Product extends Model
             ->select('id', 'product_name', 'product_image')
             ->paginate(8);
     }
+
+    // 商品画像アップロード処理
+    public static function uploadImage($file)
+    {
+        if ($file) {
+            return $file->store('product_images', 'public');
+        }
+        return null;
+    }
+
+    // 商品とカテゴリの関連付け
+    public function attachCategories($categoryIds)
+    {
+        if (is_array($categoryIds)) {
+            $this->categories()->attach($categoryIds);
+        }
+    }
 }

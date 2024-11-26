@@ -20,8 +20,8 @@ class SellController extends Controller
 
         $user = Auth::user(); // 現在ログインしているユーザー情報を取得
 
-        $categories = Category::all();
-        $conditions = Condition::all(); // 条件を取得
+        $categories = Category::getAllCategories();
+        $conditions = Condition::getAllConditions();
 
         return view('sell', compact('user', 'categories', 'conditions'));
     }
@@ -33,7 +33,7 @@ class SellController extends Controller
         if ($request->hasFile('product_image')) {
             // 画像ファイルが選択されていれば保存
             $file = $request->file('product_image');
-            $path = $file->store('product_images', 'public');
+            $path = Product::uploadImage($file);
 
             // 画像のパスをセッションに保存
             Session::put('product_image_path', $path);
@@ -69,9 +69,7 @@ class SellController extends Controller
 
         // カテゴリーテーブルへの関連付け
         $category_ids = $request->input('categories');
-        if (is_array($category_ids)) {
-            $product->categories()->attach($category_ids);
-        }
+        $product->attachCategories($category_ids);
 
         // セッションから画像パスを削除
         Session::forget('product_image_path');
