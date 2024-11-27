@@ -8,8 +8,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
-use Illuminate\Http\Request; // Requestクラスをインポート
-use App\Models\User; // Userモデルをインポート
+use Illuminate\Http\Request;
+use App\Models\User;
 use App\Http\Controllers\PaymentController;
 
 /*
@@ -24,18 +24,18 @@ use App\Http\Controllers\PaymentController;
 */
 
 // 認証が必要ないルート
-// IndexControllerのindexメソッドを呼び出すルート
+// Index
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // ログイン
 Route::get('/login', [AuthenticatedSessionController::class, 'show'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 // 新規登録
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // 商品詳細ページの表示
 Route::get('/item/{product_id}', [ProductController::class, 'show'])->name('product');
@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchase/success/{product_id}', [PurchaseController::class, 'success'])->name('purchase.success');
     Route::get('/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
 
-    // これさっきセッション保存用についかしたやつ
+    // 配送先住所セッション保存用
     Route::post('/payment/store/{product_id}', [PurchaseController::class, 'storePaymentMethod'])->name('payment.store');
 });
 
