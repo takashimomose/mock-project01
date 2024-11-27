@@ -21,7 +21,7 @@ $ git clone git@github.com:takashimomose/mock-project01.git
 クローンしたプロジェクトディレクトリへ移動し、Dockerコンテナをビルドおよび起動します。
 
 ```bash
-$ cd exam01
+$ cd mock-project01
 $ docker-compose up -d --build
 ```
 
