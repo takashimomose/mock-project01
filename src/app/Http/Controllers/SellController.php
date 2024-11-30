@@ -44,6 +44,7 @@ class SellController extends Controller
 
         // 商品画像がアップロードされていない場合でも、セッションに保存されたパスを使用して、バリデーションを回避
         $rules = [
+            'product_image' => 'required',
             'categories' => 'required|array',
             'condition_id' => 'required',
             'product_name' => 'required',
