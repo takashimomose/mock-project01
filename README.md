@@ -159,7 +159,7 @@ http://localhost/
 CVC: 任意の3桁の数字（例: 123）
 ```
 
-- 未実装のPHP Unit テスト
+- 未実装（実装途中となってしまった）のPHP Unit テスト
 
 ```bash
 Stripe支払い画面への遷移: PaymentTest.php
